@@ -27,50 +27,53 @@ async function handler(request) {
 
   if (url.pathname === "/register" && request.method === "POST") {
     let user = await request.json();
-
+  
     const userExists = users.some(
       (person) => person.username === user.username
     );
-
+  
     if (!userExists) {
       let maxId = 0;
       let idNumber;
-
+  
       for (let user of users) {
         idNumber = Number(user.id);
         if (idNumber > maxId) {
-          maxId = user.id;
+          maxId = idNumber;  
         }
       }
-
+  
       const newId = maxId + 1;
-
+  
       const userData = new CreateUser(
         newId,
         user.username,
         user.password,
         []
       );
-
+  
       users.push(userData);
-
-      const jsonString = JSON.stringify(users)
-      Deno.writeTextFileSync("data.json", jsonString)
-
+  
+      const jsonString = JSON.stringify(users);
+      Deno.writeTextFileSync("data.json", jsonString);
+  
       return new Response(JSON.stringify(users), {
         status: 200,
         headers: headersCORS,
       });
-    } else{
-      return new Response( JSON.stringify({ message: "User already exists" }), 
-      {
-        status: 409,
-        headers: {
-          ...headersCORS,
-          "Content-Type": "application/json", 
-        },
-      }
-    );
+    } else {
+      return new Response(
+        JSON.stringify({ message: "User already exists" }),
+        {
+          status: 409,
+          headers: {
+            ...headersCORS,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
+  }
 
   if (url.pathname === "/login" && request.method === "GET") {
     let userName = url.searchParams.get("username");
