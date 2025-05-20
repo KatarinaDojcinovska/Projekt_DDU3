@@ -1,4 +1,4 @@
-// Skickar en GIF-url till Deno-backend för att sparas i saved-gifs.json
+// Skickar en GIF-url till backend för att sparas i saved-gifs.json
 function saveGif(url) {
   fetch("http://localhost:8000/save-gif", {
     method: "POST",
