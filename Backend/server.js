@@ -107,5 +107,27 @@ if (url.pathname === "/login" && request.method === "GET") {
         JSON.stringify({ message: "Login successful" }),
         { status: 200, headers: headersCORS }
     );
+}
+//Leiths
+if (url.pathname === "/save-gif" && request.method === "POST") {
+  const body = await request.json();
+  const gifUrl = body.gifUrl;
 
+  let saved = [];
+
+  try {
+    saved = JSON.parse(Deno.readTextFileSync("saved-gifs.json"));
+  }catch (error) {
+  console.log("Fel vid läsning av saved-gifs.json:", error.message);
+  saved = [];
+  }
+
+  saved.push(gifUrl);
+  console.log("GIF sparad:", gifUrl);
+  Deno.writeTextFileSync("saved-gifs.json", JSON.stringify(saved, null, 2));
+
+  return new Response(JSON.stringify({ message: "GIF sparad" }), {
+    status: 200,
+    headers: headersCORS,
+  });
 }
