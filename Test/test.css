@@ -1,0 +1,92 @@
+body{
+    display: flex;
+    justify-content: center;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    gap: 40px;
+    background-color: beige;
+    width: 400px;
+    align-items: center;
+}
+
+.Register{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.Login{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.try-Gif{
+    display: flex;
+    gap: 10px;
+} 
+
+#gif{
+    width: 200px;
+    height: 180px;
+    background-color: pink;
+}
+
+.save-Gif{
+    display: flex;
+    gap: 10px;
+}
+
+.delete-Gif{
+    display: flex;
+    gap: 10px;
+}
+
+h1{
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+input{
+    width: 200px;
+    height: 20px;
+}
+
+button{
+    width: 80px;
+    background-color: pink;
+    height: 30px;
+    border-radius: 10px;
+}
+
+#messageBox {
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    z-index: 1000;
+    background-color: #f8f0e3;
+    border: 2px solid #a97961;
+    border-radius: 12px;
+    padding: 15px 40px 15px 15px;
+    color: #4a2d20;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    display: none;
+    min-width: 200px;
+    max-width: 300px;
+    transition: opacity 0.3s ease;
+}
+
+#closeMessageBtn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    color: #6d4e3d;
+    font-size: 18px;
+    font-weight: bold;
+}
