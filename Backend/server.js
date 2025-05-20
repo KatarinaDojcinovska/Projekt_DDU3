@@ -1,4 +1,6 @@
 //Katties
+import { CreateUser } from "./user.js";
+
 async function handler(request) {
   const data = Deno.readTextFileSync("data.json");
   console.log(data)
@@ -43,11 +45,12 @@ async function handler(request) {
 
       const newId = maxId + 1;
 
-      const userData = {
-        id: newId,
-        username: user.username,
-        password: user.password,
-      };
+      const userData = new CreateUser(
+        newId,
+        user.username,
+        user.password,
+        []
+      );
 
       users.push(userData);
 
@@ -58,16 +61,16 @@ async function handler(request) {
         status: 200,
         headers: headersCORS,
       });
-    } else {
-      return new Response(
-        { message: "User already exists" },
-        {
-          status: 409,
-          headers: headersCORS,
-        }
-      );
-    }
-  }
+    } else{
+      return new Response( JSON.stringify({ message: "User already exists" }), 
+      {
+        status: 409,
+        headers: {
+          ...headersCORS,
+          "Content-Type": "application/json", 
+        },
+      }
+    );
 
   if (url.pathname === "/login" && request.method === "GET") {
     let userName = url.searchParams.get("username");
