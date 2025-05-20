@@ -68,10 +68,8 @@ async function handler(request) {
       );
     }
   }
-}
-Deno.serve(handler);
-//Judys
-if (url.pathname === "/login" && request.method === "GET") {
+
+  if (url.pathname === "/login" && request.method === "GET") {
     let userName = url.searchParams.get("username");
     let password = url.searchParams.get("password");
     
@@ -107,9 +105,9 @@ if (url.pathname === "/login" && request.method === "GET") {
         JSON.stringify({ message: "Login successful" }),
         { status: 200, headers: headersCORS }
     );
-}
-//Leiths
-if (url.pathname === "/save-gif" && request.method === "POST") {
+  }
+  //leiths
+  if (url.pathname === "/save-gif" && request.method === "POST") {
   const body = await request.json();
   const gifUrl = body.gifUrl;
 
@@ -129,5 +127,6 @@ if (url.pathname === "/save-gif" && request.method === "POST") {
   return new Response(JSON.stringify({ message: "GIF sparad" }), {
     status: 200,
     headers: headersCORS,
-  });
+  });}
 }
+Deno.serve(handler);
