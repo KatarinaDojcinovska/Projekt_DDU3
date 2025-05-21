@@ -114,27 +114,106 @@ async function handler(request) {
     );
   }
 
-  //leiths
+  // Save GIF
   if (url.pathname === "/save-gif" && request.method === "POST") {
     const body = await request.json();
     const gifUrl = body.gifUrl;
+    const username = body.username;
 
-    let saved = [];
+    const data = Deno.readTextFileSync("data.json");
+    const users = JSON.parse(data);
 
-    try {
-      saved = JSON.parse(Deno.readTextFileSync("saved-gifs.json"));
-    } catch (error) {
-      console.log("Fel vid läsning av saved-gifs.json:", error.message);
-      saved = [];
+    let user = null;
+    for (const u of users) {
+      if (u.name === username) {
+        user = u;
+        break;
+      }
     }
 
-    saved.push(gifUrl);
-    console.log("GIF sparad:", gifUrl);
-    Deno.writeTextFileSync("saved-gifs.json", JSON.stringify(saved, null, 2));
+    if (!user) {
+      return new Response(JSON.stringify({ message: "User not found" }), {
+        status: 404,
+        headers: headersCORS
+      });
+    }
 
-    return new Response(JSON.stringify({ message: "GIF sparad" }), {
+    if (!user.gif.includes(gifUrl)) {
+      user.gif.push(gifUrl);
+      Deno.writeTextFileSync("data.json", JSON.stringify(users, null, 2));
+    }
+
+    return new Response(JSON.stringify({ message: "GIF saved" }), {
       status: 200,
-      headers: headersCORS,
+      headers: headersCORS
+    });
+  }
+
+  // Delete GIF
+  if (url.pathname === "/delete-gif" && request.method === "DELETE") {
+    const body = await request.json();
+    const gifUrl = body.gifUrl;
+    const username = body.username;
+
+    const data = Deno.readTextFileSync("data.json");
+    const users = JSON.parse(data);
+
+    let user = null;
+    for (const u of users) {
+      if (u.name === username) {
+        user = u;
+        break;
+      }
+    }
+
+    if (!user) {
+      return new Response(JSON.stringify({ message: "User not found" }), {
+        status: 404,
+        headers: headersCORS
+      });
+    }
+
+    const filteredGifs = [];
+    for (const gif of user.gif) {
+      if (gif !== gifUrl) {
+        filteredGifs.push(gif);
+      }
+    }
+
+    user.gif = filteredGifs;
+    Deno.writeTextFileSync("data.json", JSON.stringify(users, null, 2));
+
+    return new Response(JSON.stringify({ message: "GIF deleted" }), {
+      status: 200,
+      headers: headersCORS
+    });
+  }
+
+  // Get GIFs
+  if (url.pathname === "/get-gifs" && request.method === "GET") {
+    const username = url.searchParams.get("username");
+
+    const data = Deno.readTextFileSync("data.json");
+    const users = JSON.parse(data);
+
+    let user = null;
+    for (const u of users) {
+      if (u.name === username) {
+        user = u;
+        break;
+      }
+    }
+
+    if (!user) {
+      return new Response(JSON.stringify({ message: "User not found" }), {
+        status: 404,
+        headers: headersCORS
+      });
+    }
+
+    return new Response(JSON.stringify(user.gif), {
+      status: 200,
+      headers: headersCORS
     });
   }
 }
