@@ -12,7 +12,7 @@ button2.addEventListener("click", async function () {
       headers: {
         "Content-Type": "application/json",
       },
-    }); 
+    });
 
     console.log("hej");
 
@@ -28,27 +28,49 @@ button2.addEventListener("click", async function () {
   }
 });
 
-const deleteButton = document.getElementById("deleteGif")
+const deleteButton = document.getElementById("deleteGif");
 
-deleteButton.addEventListener("click", async function (){
+deleteButton.addEventListener("click", async function () {
   const messageBox = document.getElementById("messageBox");
   const messageText = document.getElementById("messageText");
 
   const response = await fetch("http:localhost:8000/delete-gif", {
     method: "DELETE",
-    headers: {"Content-Type": "application/json"}
-  })
+    headers: { "Content-Type": "application/json" },
+  });
 
   messageBox.style.display = "block";
 
-  const result = await response.json()
+  const result = await response.json();
 
-  if(response.status === 200){
-    messageText.textContent = "GIF Deleted"
-  } else if (response.status === 404){
-    messageText.textContent = "User not found"
+  if (response.status === 200) {
+    messageText.textContent = "GIF Deleted";
+  } else if (response.status === 404) {
+    messageText.textContent = "User not found";
   } else {
     messageText.textContent = result.error;
   }
-})
+});
 
+const saveButton = document.getElementById("saveGif");
+
+saveButton.addEventListener("click", async function () {
+  const messageBox = document.getElementById("messageBox");
+  const messageText = document.getElementById("messageText");
+  messageBox.style.display = "block";
+
+  const response = await fetch("http:localhost:8000/save-gif", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  const result = await response.json();
+
+  if (response.status === 200) {
+    messageText.textContent = "GIF saved!";
+  } else if (response.status === 404) {
+    messageText.textContent = "User not found";
+  } else {
+    messageText.textContent = result.error;
+  }
+});
