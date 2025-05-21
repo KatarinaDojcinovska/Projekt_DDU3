@@ -3,6 +3,9 @@ const gifBox = document.getElementById("gif");
 const tryGifBtn = document.querySelector(".try-Gif button");
 const deleteButton = document.getElementById("deleteGif");
 const saveButton = document.getElementById("saveGif");
+const messageBox = document.getElementById("messageBox");
+const messageText = document.getElementById("messageText");
+const closeMessageBtn = document.getElementById("closeMessageBtn")
 
 let currentGifUrl = "";
 
@@ -35,9 +38,6 @@ button2.addEventListener("click", async function () {
 });
 
 deleteButton.addEventListener("click", async function () {
-  const messageBox = document.getElementById("messageBox");
-  const messageText = document.getElementById("messageText");
-
   const response = await fetch("http:localhost:8000/delete-gif", {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
@@ -57,8 +57,6 @@ deleteButton.addEventListener("click", async function () {
 });
 
 saveButton.addEventListener("click", async function () {
-  const messageBox = document.getElementById("messageBox");
-  const messageText = document.getElementById("messageText");
   messageBox.style.display = "block";
 
   const response = await fetch("http:localhost:8000/save-gif", {
@@ -102,5 +100,5 @@ async function bringGIF() {
 
 tryGifBtn.addEventListener("click", bringGIF);
 closeMessageBtn.addEventListener("click", function () {
-  messageBox.style.display = "none";
+  messageBox.style.display = "hidden";
 });
