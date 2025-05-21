@@ -75,9 +75,13 @@ async function handler(request) {
     }
   }
 
-  if (url.pathname === "/login" && request.method === "GET") {
-    let userName = url.searchParams.get("username");
-    let password = url.searchParams.get("password");
+  if (url.pathname === "/login" && request.method === "POST") {
+    const user = await request.json();
+    
+
+    const userName = user.userName;
+    const password = user.password;
+  
 
     if (!userName || !password) {
       return new Response(
@@ -85,7 +89,7 @@ async function handler(request) {
         { status: 400, headers: headersCORS }
       );
     }
-
+ 
     let foundUser = null;
     for (let i = 0; i < users.length; i++) {
       if (users[i].name === userName) {
@@ -100,6 +104,7 @@ async function handler(request) {
         { status: 404, headers: headersCORS }
       );
     }
+  
 
     if (foundUser.password !== password) {
       return new Response(
@@ -107,7 +112,7 @@ async function handler(request) {
         { status: 401, headers: headersCORS }
       );
     }
-
+  
     return new Response(
       JSON.stringify({ message: "Login successful" }),
       { status: 200, headers: headersCORS }

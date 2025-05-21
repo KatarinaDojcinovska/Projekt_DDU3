@@ -24,14 +24,20 @@ button2.addEventListener("click", async function () {
   usernameInput.value = "";
   passwordInput.value = "";
 
-  const url = `http://localhost:8000/login?username=${username}&password=${password}`;
+  let logInUser = JSON.stringify({
+      userName: username, 
+      password: password
+    });
+
+  const url = `http://localhost:8000/login`;
 
   try {
     const response = await fetch(url, {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      body: logInUser,
     });
 
     const result = await response.json();
