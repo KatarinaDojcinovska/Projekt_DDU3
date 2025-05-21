@@ -110,5 +110,5 @@ async function bringGIF() {
 
 tryGifBtn.addEventListener("click", bringGIF);
 closeMessageBtn.addEventListener("click", function () {
-  messageBox.style.display = "hidden";
+  messageBox.style.display = "none";
 });
