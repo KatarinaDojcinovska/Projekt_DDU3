@@ -28,3 +28,25 @@ button2.addEventListener("click", async function () {
   }
 });
 
+const saveButton = document.getElementById("saveGif")
+
+saveButton.addEventListener("click", async function () {
+  const messageBox = document.getElementById("messageBox");
+  const messageText = document.getElementById("messageText");
+  messageBox.style.display = "block";
+
+  const response = await fetch("http:localhost:8000/save-gif", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+  })
+  
+  const result = response.json();
+
+  if(response.status === 200){
+    messageText.textContent = "GIF saved!";
+  } else if(response.status === 404){
+    messageText.textContent = "User not found";
+  } else {
+    messageText.textContent = result.error;
+  }
+})
