@@ -38,7 +38,7 @@ button2.addEventListener("click", async function () {
 });
 
 deleteButton.addEventListener("click", async function () {
-  const response = await fetch("http:localhost:8000/test-denoAPI", {
+  const response = await fetch("http:localhost:8000/delete-gif", {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
   });
@@ -59,7 +59,7 @@ deleteButton.addEventListener("click", async function () {
 saveButton.addEventListener("click", async function () {
   messageBox.style.display = "block";
 
-  const response = await fetch("http:localhost:8000/test-denoAPI", {
+  const response = await fetch("http:localhost:8000/save-gif", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
   });
