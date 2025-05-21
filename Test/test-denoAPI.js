@@ -5,7 +5,7 @@ const deleteButton = document.getElementById("deleteGif");
 const saveButton = document.getElementById("saveGif");
 const messageBox = document.getElementById("messageBox");
 const messageText = document.getElementById("messageText");
-const closeMessageBtn = document.getElementById("closeMessageBtn")
+const closeMessageBtn = document.getElementById("closeMessageBtn");
 
 let currentGifUrl = "";
 
@@ -100,5 +100,5 @@ async function bringGIF() {
 
 tryGifBtn.addEventListener("click", bringGIF);
 closeMessageBtn.addEventListener("click", function () {
-  messageBox.style.display = "hidden";
+  messageBox.style.display = "none";
 });
