@@ -30,9 +30,9 @@ main{
     gap: 10px;
 } 
 
-#gif{
-    width: 200px;
-    height: 180px;
+#gif img {
+    width: 100%;
+    height: auto;
     background-color: pink;
 }
 
