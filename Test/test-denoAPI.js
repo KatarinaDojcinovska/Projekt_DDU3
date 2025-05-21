@@ -1,4 +1,10 @@
 const button2 = document.getElementById("logInButton");
+const gifBox = document.getElementById("gif");
+const tryGifBtn = document.querySelector(".try-Gif button");
+const deleteButton = document.getElementById("deleteGif");
+const saveButton = document.getElementById("saveGif");
+
+let currentGifUrl = "";
 
 button2.addEventListener("click", async function () {
   const username = document.getElementById("username-logIn").value;
@@ -28,8 +34,6 @@ button2.addEventListener("click", async function () {
   }
 });
 
-const deleteButton = document.getElementById("deleteGif");
-
 deleteButton.addEventListener("click", async function () {
   const messageBox = document.getElementById("messageBox");
   const messageText = document.getElementById("messageText");
@@ -52,8 +56,6 @@ deleteButton.addEventListener("click", async function () {
   }
 });
 
-const saveButton = document.getElementById("saveGif");
-
 saveButton.addEventListener("click", async function () {
   const messageBox = document.getElementById("messageBox");
   const messageText = document.getElementById("messageText");
@@ -73,4 +75,32 @@ saveButton.addEventListener("click", async function () {
   } else {
     messageText.textContent = result.error;
   }
+});
+
+async function bringGIF() {
+  const apiKey = "AIzaSyB0rByOPuVe1syMsx5CntyK69GUbPecxN8";
+  const searchTerm = "sunny weather";
+  const url = `https://tenor.googleapis.com/v2/search?q=${searchTerm}&key=${apiKey}&limit=1&random=true`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    currentGifUrl = data.results[0].media_formats.tinygif.url;
+    gifBox.innerHTML = "";
+
+    const img = document.createElement("img");
+    img.src = currentGifUrl;
+    img.style.width = "200px";
+    gifBox.appendChild(img);
+
+    console.log("GIF hämtad:", currentGifUrl);
+  } catch (err) {
+    console.error("Fel vid GIF-hämtning:", err);
+  }
+}
+
+tryGifBtn.addEventListener("click", bringGIF);
+closeMessageBtn.addEventListener("click", function () {
+  messageBox.style.display = "none";
 });
