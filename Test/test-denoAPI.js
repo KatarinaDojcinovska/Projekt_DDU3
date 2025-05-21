@@ -10,8 +10,19 @@ const closeMessageBtn = document.getElementById("closeMessageBtn")
 let currentGifUrl = "";
 
 button2.addEventListener("click", async function () {
-  const username = document.getElementById("username-logIn").value;
-  const password = document.getElementById("password-logIn").value;
+  const usernameInput = document.getElementById("username-logIn");
+  const passwordInput = document.getElementById("password-logIn");
+
+  const username = usernameInput.value.trim();
+  const password = passwordInput.value.trim();
+
+  if (!username || !password) {
+    alert("Vänligen fyll i både användarnamn och lösenord.");
+    return; 
+  }
+
+  usernameInput.value = "";
+  passwordInput.value = "";
 
   const url = `http://localhost:8000/login?username=${username}&password=${password}`;
 
@@ -23,14 +34,13 @@ button2.addEventListener("click", async function () {
       },
     });
 
-    console.log("hej");
-
     const result = await response.json();
 
     if (response.ok) {
       console.log("Inloggning lyckades:", result);
     } else {
       console.error("Inloggning misslyckades:", result.error);
+      alert("Inloggning misslyckades - användaren finns inte");
     }
   } catch (err) {
     console.error("Något gick fel:", err);
