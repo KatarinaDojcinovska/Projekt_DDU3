@@ -2,7 +2,7 @@ export class CreateUser { //Hantera användardata
     
     constructor(id, name, password, gif = []) {
       this.id = id;
-      this.name = name;
+      this.username = name;
       this.password = password;
       this.gif = gif; 
     }
