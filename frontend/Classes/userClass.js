@@ -1,9 +1,9 @@
 export class CreateUserClass {
   //Hantera användardata
 
-  constructor(id, name, password, gif = []) {
+  constructor(id, username, password, gif = []) {
     this.id = id;
-    this.username = name;
+    this.username = username;
     this.password = password;
     this.gif = gif;
   }
@@ -11,7 +11,7 @@ export class CreateUserClass {
   getInfo() {
     return {
       id: this.id,
-      name: this.name,
+      name: this.username,
       totalGifs: this.gif.length,
     };
   }

@@ -1,6 +1,10 @@
 //Klar till 99% lite språk ändring osv
 const registerButton = document.querySelector("#registerButton");
 const logInButton = document.getElementById("logInButton");
+let currentUser = null;
+
+const showSavedGifsBtn = document.getElementById("showSavedGifs");
+const savedGifBox = document.getElementById("savedGifs");
 const tryGifBtn = document.querySelector("#tryGifbtn");
 const saveGifButton = document.getElementById("saveGifbtn");
 const deleteGifButton = document.getElementById("deleteGifbtn");
@@ -20,7 +24,7 @@ async function register() {
   const response = await fetch("http://localhost:8000/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name: username, password: password}),
+    body: JSON.stringify({ username: username, password: password}),
   });
   const result = await response.json();
 
@@ -84,6 +88,7 @@ logInButton.addEventListener("click", async function () {
 
     if (response.status === 200) {
       messageText.textContent = "Login succeeded!";
+      currentUser = username;
       console.log("Inloggning lyckades:", result);
     } else {
       messageText.textContent = "Login failed!";
@@ -125,20 +130,23 @@ tryGifBtn.addEventListener("click", bringGIF);
 
 //saveGIF
 saveGifButton.addEventListener("click", async function () {
-  if (!currentGifUrl) {
-    alert("Ingen GIF att spara.");
+  if (!currentGifUrl || !currentUser) {
+    alert("No GIF to save or user not logged in.");
     return;
   }
 
   messageBox.style.display = "block";
 
-  const gifUrl = JSON.stringify({ gifUrl: currentGifUrl });
+  const gifData = JSON.stringify({
+    gifUrl: currentGifUrl,
+    username: currentUser
+  });
 
   try {
     const response = await fetch("http://localhost:8000/save-gif", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: gifUrl,
+      body: gifData,
     });
 
     const result = await response.json();
@@ -148,13 +156,14 @@ saveGifButton.addEventListener("click", async function () {
     } else if (response.status === 404) {
       messageText.textContent = "User not found";
     } else {
-      messageText.textContent = result.error;
+      messageText.textContent = result.error || "Unknown error";
     }
   } catch (err) {
-    messageText.textContent = "Ett fel uppstod vid sparande.";
+    messageText.textContent = "Error while saving GIF.";
     console.error(err);
   }
 });
+
 
 closeMessageBtn.addEventListener("click", function () {
   messageBox.style.display = "none";
@@ -162,20 +171,81 @@ closeMessageBtn.addEventListener("click", function () {
 
 //delete
 deleteGifButton.addEventListener("click", async function () {
-  const response = await fetch("http:localhost:8000/delete-gif", {
-    method: "DELETE",
-    headers: { "Content-Type": "application/json" },
+  if (!currentGifUrl || !currentUser) {
+    alert("No GIF to delete or user not logged in.");
+    return;
+  }
+
+  const gifData = JSON.stringify({
+    gifUrl: currentGifUrl,
+    username: currentUser
   });
 
-  messageBox.style.display = "block";
+  try {
+    const response = await fetch("http://localhost:8000/delete-gif", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: gifData,
+    });
 
-  const result = await response.json();
+    const result = await response.json();
+    messageBox.style.display = "block";
 
-  if (response.status === 200) {
-    messageText.textContent = "GIF Deleted";
-  } else if (response.status === 404) {
-    messageText.textContent = "User not found";
-  } else {
-    messageText.textContent = result.error;
+    if (response.status === 200) {
+      messageText.textContent = "GIF deleted!";
+    } else if (response.status === 404) {
+      messageText.textContent = "User not found";
+    } else {
+      messageText.textContent = result.error || "Unknown error";
+    }
+  } catch (err) {
+    messageText.textContent = "Error while deleting GIF.";
+    console.error(err);
   }
 });
+
+showSavedGifsBtn.addEventListener("click", async () => {
+  if (!currentUser) {
+    alert("Please log in first to see saved GIFs.");
+    return;
+  }
+
+  try {
+    const response = await fetch(`http://localhost:8000/get-gifs?username=${currentUser}`);
+    const gifs = await response.json();
+    if (!Array.isArray(gifs)) {
+      alert("Could not load saved GIFS.");
+      return;
+    }
+
+    savedGifBox.innerHTML = ""; // Clear previous
+
+    gifs.forEach(url => {
+      const div = document.createElement("div");
+      const img = document.createElement("img");
+      img.src = url;
+      img.style.width = "100px";
+
+      const btn = document.createElement("button");
+      btn.textContent = "Delete";
+      btn.onclick = async () => {
+        const res = await fetch("http://localhost:8000/delete-gif", {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ gifUrl: url, username: currentUser })
+        });
+
+        const result = await res.json();
+        alert(result.message);
+        div.remove(); // Remove from view
+      };
+
+      div.appendChild(img);
+      div.appendChild(btn);
+      savedGifBox.appendChild(div);
+    });
+  } catch (err) {
+    console.error("Error fetching saved GIFs:", err);
+  }
+});
+

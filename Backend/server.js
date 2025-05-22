@@ -1,12 +1,27 @@
 //99% klar, länka till classen rätt
+import { serveDir } from "https://deno.land/std@0.224.0/http/file_server.ts";
 import { CreateUserClass } from "../frontend/Classes/userClass.js";
 
 async function handler(request) {
+  const url = new URL(request.url);
+  const pathname = url.pathname;
+
+  // Serve static files from "Test" folder
+  if (
+    request.method === "GET" &&
+    !pathname.startsWith("/register") &&
+    !pathname.startsWith("/login") &&
+    !pathname.startsWith("/save-gif") &&
+    !pathname.startsWith("/delete-gif") &&
+    !pathname.startsWith("/get-gifs")
+  ) {
+      return serveDir(request, { fsRoot: "../Test", urlRoot: "" });
+
+  }
   const data = Deno.readTextFileSync("data.json");
   console.log(data);
   let users = JSON.parse(data);
   console.log(users);
-  const url = new URL(request.url);
 
   const headersCORS = new Headers();
   headersCORS.set("Access-Control-Allow-Origin", "*");
@@ -26,44 +41,40 @@ async function handler(request) {
   }
   //register
   if (url.pathname === "/register" && request.method === "POST") {
-    let user = await request.json();
+  let user = await request.json();
 
-    const userExists = users.some((person) => person.name === user.name);
+  const userExists = users.some((person) => person.username === user.username);
 
-    if (!userExists) {
-      let maxId = 0;
-      let idNumber;
+  if (!userExists) {
+    let maxId = users.reduce((max, u) => Math.max(max, Number(u.id)), 0);
+    const newId = maxId + 1;
 
-      for (let user of users) {
-        idNumber = Number(user.id);
-        if (idNumber > maxId) {
-          maxId = idNumber;
-        }
-      }
+    const userData = new CreateUserClass(newId, user.username, user.password, []);
 
-      const newId = maxId + 1;
+    const newUserObject = {
+      id: userData.id,
+      username: userData.username,
+      password: userData.password,
+      gif: userData.gif,
+    };
 
-      const userData = new CreateUserClass(newId, user.name, user.password, []);
+    users.push(newUserObject);
 
-      users.push(userData);
-
-      const jsonString = JSON.stringify(users);
+    const jsonString = JSON.stringify(users, null, 2);
       Deno.writeTextFileSync("data.json", jsonString);
 
-      return new Response(JSON.stringify(users), {
-        status: 200,
-        headers: headersCORS,
-      });
+    return new Response(JSON.stringify(users), {
+      status: 200,
+      headers: headersCORS,
+    });
     } else {
       return new Response(JSON.stringify({ message: "User already exists" }), {
         status: 409,
-        headers: {
-          ...headersCORS,
-          "Content-Type": "application/json",
-        },
+        headers: headersCORS,
       });
     }
   }
+
   //login
   if (url.pathname === "/login" && request.method === "POST") {
     const user = await request.json();
@@ -78,7 +89,7 @@ async function handler(request) {
       );
     }
 
-    let foundUser = users.find((u) => u.name === username);
+    let foundUser = users.find((u) => u.name === username || u.username === username);
     // for (let i = 0; i < users.length; i++) {
     //   if (users[i].name === username) {
     //     foundUser = users[i];
@@ -119,7 +130,7 @@ async function handler(request) {
 
     let user = null;
     for (const u of users) {
-      if (u.name === username) {
+      if (u.name === username || u.username === username) {
         user = u;
         break;
       }
@@ -154,7 +165,7 @@ async function handler(request) {
 
     let user = null;
     for (const u of users) {
-      if (u.name === username) {
+      if (u.name === username || u.username === username) {
         user = u;
         break;
       }
@@ -192,7 +203,7 @@ async function handler(request) {
 
     let user = null;
     for (const u of users) {
-      if (u.name === username) {
+      if (u.name === username || u.username === username) {
         user = u;
         break;
       }
