@@ -8,10 +8,9 @@ const deleteGifButton = document.getElementById("deleteGifbtn");
 const gifBox = document.getElementById("gif");
 const messageBox = document.getElementById("messageBox");
 const messageText = document.getElementById("messageText");
-const closeMessageBtn = document.getElementById("closeMessageBtn")
+const closeMessageBtn = document.getElementById("closeMessageBtn");
 const usernameInput = document.querySelector("#username-Registration");
 const passwordInput = document.querySelector("#password-Registration");
-
 
 //register
 async function register() {
@@ -21,7 +20,7 @@ async function register() {
   const response = await fetch("http://localhost:8000/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password })
+    body: JSON.stringify({ name: username, password: password}),
   });
   const result = await response.json();
 
@@ -29,8 +28,12 @@ async function register() {
 
   if (response.status === 200) {
     messageText.textContent = "Register succeeded!";
+    usernameInput.value = "";
+    passwordInput.value = "";
   } else if (response.status === 409) {
     messageText.textContent = "User already exists!";
+    usernameInput.value = "";
+    passwordInput.value = "";
   } else {
     messageText.textContent = result.error || "Registration failed";
   }
@@ -39,9 +42,8 @@ async function register() {
 registerButton.addEventListener("click", register);
 
 closeMessageBtn.addEventListener("click", function () {
-    messageBox.style.display = "none";
-})
-
+  messageBox.style.display = "none";
+});
 
 //login
 logInButton.addEventListener("click", async function () {
@@ -53,7 +55,7 @@ logInButton.addEventListener("click", async function () {
 
   if (!username || !password) {
     alert("Vänligen fyll i både användarnamn och lösenord.");
-    return; 
+    return;
   }
 
   usernameInput.value = "";
@@ -63,6 +65,7 @@ logInButton.addEventListener("click", async function () {
       username: username, 
       password: password
     });
+
 
   const url = `http://localhost:8000/login`;
 
@@ -176,4 +179,3 @@ deleteGifButton.addEventListener("click", async function () {
     messageText.textContent = result.error;
   }
 });
-
