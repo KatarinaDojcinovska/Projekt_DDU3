@@ -1,4 +1,4 @@
-//99% klar, länka till classen rätt 
+//99% klar, länka till classen rätt
 import { CreateUserClass } from "../frontend/Classes/userClass.js";
 
 async function handler(request) {
@@ -24,13 +24,11 @@ async function handler(request) {
   if (url.pathname === "/") {
     return new Response(null, { headers: headersCORS });
   }
-//register
+  //register
   if (url.pathname === "/register" && request.method === "POST") {
     let user = await request.json();
 
-    const userExists = users.some(
-      (person) => person.name === user.name
-    );
+    const userExists = users.some((person) => person.name === user.name);
 
     if (!userExists) {
       let maxId = 0;
@@ -45,12 +43,7 @@ async function handler(request) {
 
       const newId = maxId + 1;
 
-      const userData = new CreateUserClass(
-        newId,
-        user.name,
-        user.password,
-        []
-      );
+      const userData = new CreateUserClass(newId, user.name, user.password, []);
 
       users.push(userData);
 
@@ -62,61 +55,57 @@ async function handler(request) {
         headers: headersCORS,
       });
     } else {
-      return new Response(
-        JSON.stringify({ message: "User already exists" }),
-        {
-          status: 409,
-          headers: {
-            ...headersCORS,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      return new Response(JSON.stringify({ message: "User already exists" }), {
+        status: 409,
+        headers: {
+          ...headersCORS,
+          "Content-Type": "application/json",
+        },
+      });
     }
   }
-//login
+  //login
   if (url.pathname === "/login" && request.method === "POST") {
     const user = await request.json();
-    
 
-    const userName = user.userName;
+    const username = user.username;
     const password = user.password;
-  
 
-    if (!userName || !password) {
+    if (!username || !password) {
       return new Response(
         JSON.stringify({ error: "Username and password required!" }),
         { status: 400, headers: headersCORS }
       );
     }
- 
-    let foundUser = null;
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].name === userName) {
-        foundUser = users[i];
-        break;
-      }
-    }
+
+    let foundUser = users.find((u) => u.name === username);
+    // for (let i = 0; i < users.length; i++) {
+    //   if (users[i].name === username) {
+    //     foundUser = users[i];
+    //     break;
+    //   }
+    // }
 
     if (!foundUser) {
-      return new Response(
-        JSON.stringify({ error: "User does not exist" }),
-        { status: 404, headers: headersCORS }
-      );
+      return new Response(JSON.stringify({ error: "User does not exist" }), {
+        status: 404,
+        headers: headersCORS,
+      });
     }
-  
 
     if (foundUser.password !== password) {
-      return new Response(
-        JSON.stringify({ error: "Invalid password" }),
-        { status: 401, headers: headersCORS }
-      );
+      return new Response(JSON.stringify({ error: "Invalid password" }), {
+        status: 401,
+        headers: headersCORS,
+      });
     }
-  
-    return new Response(
-      JSON.stringify({ message: "Login successful" }),
-      { status: 200, headers: headersCORS }
-    );
+
+    if (foundUser) {
+      return new Response(JSON.stringify({ message: "Login successful" }), {
+        status: 200,
+        headers: headersCORS,
+      });
+    }
   }
 
   // Save GIF
@@ -139,7 +128,7 @@ async function handler(request) {
     if (!user) {
       return new Response(JSON.stringify({ message: "User not found" }), {
         status: 404,
-        headers: headersCORS
+        headers: headersCORS,
       });
     }
 
@@ -150,7 +139,7 @@ async function handler(request) {
 
     return new Response(JSON.stringify({ message: "GIF saved" }), {
       status: 200,
-      headers: headersCORS
+      headers: headersCORS,
     });
   }
 
@@ -174,7 +163,7 @@ async function handler(request) {
     if (!user) {
       return new Response(JSON.stringify({ message: "User not found" }), {
         status: 404,
-        headers: headersCORS
+        headers: headersCORS,
       });
     }
 
@@ -190,7 +179,7 @@ async function handler(request) {
 
     return new Response(JSON.stringify({ message: "GIF deleted" }), {
       status: 200,
-      headers: headersCORS
+      headers: headersCORS,
     });
   }
 
@@ -212,13 +201,13 @@ async function handler(request) {
     if (!user) {
       return new Response(JSON.stringify({ message: "User not found" }), {
         status: 404,
-        headers: headersCORS
+        headers: headersCORS,
       });
     }
 
     return new Response(JSON.stringify(user.gif), {
       status: 200,
-      headers: headersCORS
+      headers: headersCORS,
     });
   }
 }
