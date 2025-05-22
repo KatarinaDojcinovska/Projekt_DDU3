@@ -36,7 +36,7 @@ async function register() {
   }
 }
 
-registerBtn.addEventListener("click", register);
+registerButton.addEventListener("click", register);
 
 closeMessageBtn.addEventListener("click", function () {
     messageBox.style.display = "none";
@@ -154,7 +154,7 @@ closeMessageBtn.addEventListener("click", function () {
 });
 
 //delete
-deleteButton.addEventListener("click", async function () {
+deleteGifButton.addEventListener("click", async function () {
   const response = await fetch("http:localhost:8000/delete-gif", {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
