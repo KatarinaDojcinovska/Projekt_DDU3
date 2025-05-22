@@ -1,5 +1,5 @@
 //99% klar, länka till classen rätt 
-import { CreateUserClass } from "./";
+import { CreateUserClass } from "../frontend/Classes/userClass.js";
 
 async function handler(request) {
   const data = Deno.readTextFileSync("data.json");
