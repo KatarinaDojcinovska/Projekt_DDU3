@@ -62,9 +62,10 @@ logInButton.addEventListener("click", async function () {
   passwordInput.value = "";
 
   let logInUser = JSON.stringify({
-    userName: username,
-    password: password,
-  });
+      username: username, 
+      password: password
+    });
+
 
   const url = `http://localhost:8000/login`;
 
@@ -78,12 +79,16 @@ logInButton.addEventListener("click", async function () {
     });
 
     const result = await response.json();
+  messageBox.style.display = "block";
 
-    if (response.ok) {
+
+    if (response.status === 200) {
+      messageText.textContent = "Login succeeded!";
       console.log("Inloggning lyckades:", result);
     } else {
+      messageText.textContent = "Login failed!";
       console.error("Inloggning misslyckades:", result.error);
-      alert("Inloggning misslyckades - användaren finns inte");
+     //alert("Inloggning misslyckades - användaren finns inte");
     }
   } catch (err) {
     console.error("Något gick fel:", err);
