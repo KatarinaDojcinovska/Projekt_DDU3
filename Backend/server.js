@@ -1,5 +1,5 @@
-//Katties
-import { CreateUser } from "./user.js";
+//99% klar, länka till classen rätt 
+import { CreateUserClass } from "./";
 
 async function handler(request) {
   const data = Deno.readTextFileSync("data.json");
@@ -24,7 +24,7 @@ async function handler(request) {
   if (url.pathname === "/") {
     return new Response(null, { headers: headersCORS });
   }
-
+//register
   if (url.pathname === "/register" && request.method === "POST") {
     let user = await request.json();
 
@@ -45,7 +45,7 @@ async function handler(request) {
 
       const newId = maxId + 1;
 
-      const userData = new CreateUser(
+      const userData = new CreateUserClass(
         newId,
         user.name,
         user.password,
@@ -74,7 +74,7 @@ async function handler(request) {
       );
     }
   }
-
+//login
   if (url.pathname === "/login" && request.method === "POST") {
     const user = await request.json();
     

@@ -1,3 +1,5 @@
+//ska flyttas sen till frontend index.js
+
 const resultDiv = document.getElementById("results");
 
 async function runWeatherTest() {
@@ -39,7 +41,6 @@ function createTestBox(text, type) {
   };
   return `<div class="${classMap[type]}">${text}</div>`;
 }
-
 runWeatherTest();
 
 

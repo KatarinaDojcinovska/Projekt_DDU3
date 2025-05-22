@@ -1,4 +1,4 @@
-export class CreateUser { //Hantera användardata
+export class CreateUserClass { //Hantera användardata
     
     constructor(id, name, password, gif = []) {
       this.id = id;
