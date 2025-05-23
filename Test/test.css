@@ -1,52 +1,88 @@
-/*Behöver fixas lite
-*/
-
 body{
     display: flex;
     justify-content: center;
+    background-color: #fbeae2;
 }
 
 main{
     display: flex;
     flex-direction: column;
     padding: 40px;
-    gap: 40px;
-    background-color: beige;
+    gap: 70px;
     width: 400px;
+    background-color: #B3E7F2;
     align-items: center;
+    border-radius: 20px;
 }
 
 .Register{
     display: flex;
     flex-direction: column;
     gap: 15px;
+    background-color: #6ba6ca;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 .Login{
     display: flex;
     flex-direction: column;
     gap: 15px;
+    background-color: #6ba6ca;
+    padding: 20px;
+    border-radius: 20px;
 }
 
-.try-Gif{
+.try-gif{
     display: flex;
-    gap: 10px;
+    gap: 15px;
+    flex-direction: column;
+    align-items: center;
+    background-color: #6ba6ca;
+    padding: 20px;
+    border-radius: 20px;
 } 
 
+#gif {
+    background-color: #6ba6ca;
+    padding: 20px;
+    border-radius: 20px;
+}
 #gif img {
-    width: 100%;
+    width: 200px;
     height: auto;
     background-color: pink;
 }
 
 .save-Gif{
     display: flex;
-    gap: 10px;
+    gap: 15px;
+    flex-direction: column;
+    align-items: center;
+    background-color: #6ba6ca;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 .delete-Gif{
     display: flex;
-    gap: 10px;
+    gap: 15px;
+    flex-direction: column;
+    align-items: center;
+    background-color: #6ba6ca;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+
+.gifUrlDiv {
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    align-items: center;
+    background-color: #6ba6ca;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 h1{
@@ -57,13 +93,20 @@ h1{
 input{
     width: 200px;
     height: 20px;
+    border-radius: 2px;
+    border: solid 2px #88D4F2;
 }
 
+input::placeholder {
+    color: #3B9ABF;
+    opacity: 40%;
+}
 button{
-    width: 80px;
-    background-color: pink;
-    height: 30px;
+    width: 100px;
+    background-color: rgb(249, 194, 203);
+    height: 35px;
     border-radius: 10px;
+    border: solid 2px #86b8cb;
 }
 
 #messageBox {
@@ -72,7 +115,7 @@ button{
     right: 50px;
     z-index: 1000;
     background-color: #f8f0e3;
-    border: 2px solid #a97961;
+    border: 2px solid #6ba6ca;
     border-radius: 12px;
     padding: 15px 40px 15px 15px;
     color: #4a2d20;
