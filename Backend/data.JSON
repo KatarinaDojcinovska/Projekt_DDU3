@@ -15,5 +15,20 @@
     "username": "eh",
     "password": "he",
     "gif": []
+  },
+  {
+    "id": 4,
+    "username": "ay",
+    "password": "yo",
+    "gif": [
+      "https://media.tenor.com/YxXFlg1skUgAAAAM/its-beautiful-nice-day.gif",
+      "https://media.tenor.com/FHDWgTXGVhUAAAAM/to-hot.gif"
+    ]
+  },
+  {
+    "id": 5,
+    "username": "lelo",
+    "password": "hello",
+    "gif": []
   }
 ]
