@@ -1,1 +1,122 @@
-/*styling till huvudsidan
+:root{
+    --text-color: white;
+    --text-color2: #BB8CD7B2;
+    --background-color: #bb8cd791;
+    --border-color: #bb8cd7;
+    --text-size-h1: 80px;
+    --text-size-h2: 24px;
+    --text-size-h3: 20px;
+    --text-style: "jaro";
+}
+
+@font-face {
+    font-family: "jaro" ;
+    src: url(./Font/Jaro/Jaro-Regular-VariableFont_opsz.ttf);
+}
+
+@font-face {
+    font-family: "josefin" ;
+    src: url(./Font/Josefin_Slab/JosefinSlab-VariableFont_wght.ttf);
+}
+
+body{
+    background-image: url(./Font/Gemini_Generated_Image_igpahgigpahgigpa.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin: 0;
+}
+
+header{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-left: 40px;
+    margin-right: 40px;
+    color: var(--text-color);
+    align-items: center;
+    font-family: "jaro" ;
+}
+
+#inBetween{
+    border-left: 1px solid white;
+    height: 20px;
+    margin: 20px;
+}
+
+
+#section-1{
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+    margin-top: 0;
+}
+
+#location-part{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+#location{
+    font-family: "jaro";
+    font-size:var(--text-size-h1);
+    margin: 0;
+    margin-bottom: 10px;
+    color: var(--text-color2);
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+}
+
+#section-2{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 40px;
+    margin-left: 40px;
+    color: var(--text-color);
+    font-family: "josefin" ;
+    font-size: var(--text-size-h3);
+}
+
+#section-2,h3{
+    margin-top: 0;
+}
+
+#section-3{
+    display: flex;
+    gap: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.card{
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    background-color: var(--background-color);
+    padding: 40px;
+    height: 350px;
+    width: 100px;
+}
+
+.card,p{
+    font-family: "jaro";
+    color: var(--text-color);
+    font-size:var(--text-size-h3) ;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.weatherEmoji{
+    width: 80px;
+    height: 100px;
+    background-color: purple;
+}
+
+.weatherGIF{
+    width: 80px;
+    height: 100px;
+    background-color: purple;
+}
