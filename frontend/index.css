@@ -2,6 +2,7 @@
     --text-color: white;
     --text-color2: #BB8CD7B2;
     --background-color: #bb8cd791;
+    --background-color2: #bb8cd7f6;
     --border-color: #bb8cd7;
     --text-size-h1: 80px;
     --text-size-h2: 24px;
@@ -25,6 +26,71 @@ body{
     background-position: center;
     background-size: cover;
     margin: 0;
+}
+
+#popup-picture{
+    background-image: url(./Font/Gemini_Generated_Image_igpahgigpahgigpa.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: cover;
+   padding: 40px;
+   display: flex;
+   gap: 100px;
+   border-radius: 20px;
+   border: 2px solid var(--border-color);
+}
+
+#popup{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+#login, #register {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px;
+}
+
+#border-line{
+    border-right: 1px solid white;
+}
+
+h2{
+    font-family: "jaro";
+    color: var(--text-color);
+    font-size: 35px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: var(--text-color2);
+}
+
+input{
+    height: 30px;
+    width: 250px;
+    border-radius: 10px;
+}
+
+button{
+    background-color: var(--background-color);
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    width: 150px;
+    height: 40px;
+    font-family: "jaro";
+    color: var(--text-color);
+    font-size: var(--text-size-h3);
+}
+
+button:hover{
+    background-color: var(--background-color2);
 }
 
 header{
