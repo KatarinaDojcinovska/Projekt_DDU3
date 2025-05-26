@@ -46,7 +46,7 @@ async function handler(request) {
     !pathname.startsWith("/delete-gif") &&
     !pathname.startsWith("/get-gifs")
   ) {
-    return serveDir(request, { fsRoot: "../Test", urlRoot: "" });
+    return serveDir(request, { fsRoot: "../frontend", urlRoot: "" });
   }
 
   // REGISTER
