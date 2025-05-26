@@ -15,7 +15,7 @@ main{
     border-radius: 20px;
 }
 
-.Register{
+.register{
     display: flex;
     flex-direction: column;
     gap: 15px;
