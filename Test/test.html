@@ -1,53 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="test.css"
-</head>
-<body>
+  </head>
+  <body>
     <main>
-        <div class="Register">
-            <h1>Register</h1>
-            <input type="text" id="username-Registration" placeholder="Choose username">
-            <input type="password" id="password-Registration" placeholder="Choose password">
-            <button id="registerButton">Register</button>
-        </div>
+      <div class="register">
+        <h1>Register</h1>
+        <p id="register-data"></p>
+    </div>
+    
+    <div class="Login">
+        <h1>Log In</h1>
+        <p id="login-data"></p>
+    </div>
+    
+    <div class="try-gif">
+        <h1>Try GIF:</h1>
+        <p id="try-data"></p>
+    </div>
+    
+    <div id="gif"></div>
+    
+    <div class="save-Gif">
+        <h1>Save GIF:</h1>
+        <p id="save-data"></p>
+    </div>
+    
+    <div class="delete-Gif">
+        <h1>Delete GIF:</h1>
+        <p id="delete-data"></p>
+      </div>
 
-        <div class="Login">
-            <h1>Log In</h1>
-            <input type="text" id="username-logIn" placeholder="username">
-            <input type="password" id="password-logIn" placeholder="password">
-            <button id="logInButton">Log in</button>
-        </div>
-
-        <div class="try-gif">
-            <h1>Try GIF:</h1>
-            <button id="tryGifbtn">Try GIF</button>
-        </div>
-
-        <div id="gif"></div>
-
-        <div class="save-Gif">
-            <h1>Save GIF:</h1>
-            <button id="saveGifbtn">Save GIF</button>
-        </div>
-
-        <div class="delete-Gif">
-            <h1> Delete GIF:</h1>
-            <button id="deleteGifbtn">Delete GIF</button>
-        </div>
-
-        <div class="gifUrlDiv">
-            <p id="gifURL"></p>
-            <button id="deleteUrlBtn"> Delete GIF URL</button>
-        </div>
-
-        <div id="messageBox" class="hidden">
-            <span id="closeMessageBtn">X</span>
-            <p id="messageText"></p>
-        </div>
+      <div class="gifUrlDiv">
+        <p id="gifURL"></p>
+      </div>
     </main>
     <script src="./test.js"></script>
-</body>
+  </body>
 </html>
