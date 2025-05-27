@@ -1,1 +1,19 @@
-[{"id":"0","name":"hej","password":"hund","gif":[]},{"id":1,"password":"cat","gif":[]}]
+[
+  {
+    "id": "0",
+    "name": "hej",
+    "password": "hund",
+    "gif": []
+  },
+  {
+    "id": 1,
+    "password": "cat",
+    "gif": []
+  },
+  {
+    "id": 2,
+    "username": "lelo",
+    "password": "hälsar",
+    "gif": []
+  }
+]
