@@ -15,5 +15,17 @@
     "username": "lelo",
     "password": "hälsar",
     "gif": []
+  },
+  {
+    "id": 3,
+    "username": "sun",
+    "password": "moon",
+    "gif": []
+  },
+  {
+    "id": 4,
+    "username": "sunny",
+    "password": "moon",
+    "gif": []
   }
 ]
