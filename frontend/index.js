@@ -1,5 +1,3 @@
-
-// Så kan användningen av klassen weatherClass se ut (troligen det vi kommer att använda)
 import { WeatherClass } from "./Classes/weatherClass.js";
 
 window.addEventListener("load", function() {
@@ -18,14 +16,13 @@ window.addEventListener("load", function() {
 
       // 4) Skapa ett <p>-element och visa platsen i #compass
       const p = document.createElement("p");
-      p.textContent = weather.location;
+      p.textContent = locationName;
       compassDiv.appendChild(p);
     }
   });
 });
 
 //Login/Registrering
-
 let currentUser = localStorage.getItem("username");
 
 //REGISTRERING
