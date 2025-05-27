@@ -121,6 +121,7 @@ document.getElementById("login-button").addEventListener("click", async function
   }
 });
 
+// KLICKA o VISA GIF o SPARA GIF
 let cards = document.getElementsByClassName("card");
 
 for (let i = 0; i < cards.length; i++) {
