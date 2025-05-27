@@ -1,5 +1,3 @@
-//Hantera presentation av data från en api
-
 export class WeatherClass {
   constructor(apiKey) {
     // Din WeatherAPI-nyckel
