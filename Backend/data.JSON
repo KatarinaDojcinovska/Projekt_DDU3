@@ -3,9 +3,7 @@
     "id": "0",
     "name": "hej",
     "password": "hund",
-    "gif": [
-      null
-    ]
+    "gif": []
   },
   {
     "id": 1,
@@ -14,8 +12,8 @@
   },
   {
     "id": 2,
-    "username": "sun",
-    "password": "moon",
+    "username": "lelo",
+    "password": "hälsar",
     "gif": []
   }
 ]
