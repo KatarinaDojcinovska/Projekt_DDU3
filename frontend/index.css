@@ -1,9 +1,9 @@
 :root{
-    --text-color: white;
-    --text-color2: #BB8CD7B2;
-    --background-color: #bb8cd791;
-    --background-color2: #bb8cd7f6;
-    --border-color: #bb8cd7;
+    --text-color: #ffffff;
+    --text-color2: #F8ABB3;
+    --background-color: #fb90ad67;
+    --background-color2: #E6BCC6;
+    --border-color: #ffffff;
     --text-size-h1: 80px;
     --text-size-h2: 24px;
     --text-size-h3: 20px;
@@ -21,7 +21,7 @@
 }
 
 body{
-    background-image: url(./Font/Gemini_Generated_Image_igpahgigpahgigpa.jpg);
+    background-image: url(./Font/Images/Gemini_Generated_Image_igpahgigpahgigpa.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -29,15 +29,13 @@ body{
 }
 
 #popup-picture{
-    background-image: url(./Font/Gemini_Generated_Image_igpahgigpahgigpa.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-size: cover;
-   padding: 40px;
-   display: flex;
-   gap: 100px;
-   border-radius: 20px;
-   border: 2px solid var(--border-color);
+    padding: 40px;
+    display: flex;
+    gap: 100px;
+    border-radius: 20px;
+    border: 2px solid var(--border-color);
 }
 
 #popup{
@@ -47,7 +45,7 @@ body{
     right: 0;
     left: 0;
     background-color: var(--background-color);
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     gap: 50px;
@@ -85,7 +83,7 @@ button{
     width: 150px;
     height: 40px;
     font-family: "jaro";
-    color: var(--text-color);
+    color: var(--text-color2);
     font-size: var(--text-size-h3);
 }
 
@@ -95,21 +93,15 @@ button:hover{
 
 header{
     display: flex;
-    gap: 10px;
     justify-content: flex-end;
     margin-left: 40px;
     margin-right: 40px;
     color: var(--text-color);
     align-items: center;
-    font-family: "jaro" ;
+    font-family: "josefin" ;
+    font-size: var(--text-size-h3);
+    font-weight: bold;
 }
-
-#inBetween{
-    border-left: 1px solid white;
-    height: 20px;
-    margin: 20px;
-}
-
 
 #section-1{
     display: flex;
@@ -142,37 +134,65 @@ header{
     color: var(--text-color);
     font-family: "josefin" ;
     font-size: var(--text-size-h3);
+    align-items: center; 
+
 }
 
-#section-2,h3{
+#week-part {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+#arrow {
+    width: 20px;  
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 2px; /* justera position om den fortfarande sticker ut lite */
+}
+
+#section-2 h3{
     margin-top: 0;
+}
+
+#clickPart {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#clicky {
+    width: 40px;  
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 2px;
 }
 
 #section-3{
     display: flex;
-    gap: 10px;
+    gap: 35px;
     margin-left: 10px;
     margin-right: 10px;
 }
 
 .card{
-    border: 2px solid var(--border-color);
+    border: 3px solid var(--border-color);
     border-radius: 10px;
     background-color: var(--background-color);
     padding: 40px;
     height: 350px;
     width: 100px;
-}
-
-.card,p{
-    font-family: "jaro";
-    color: var(--text-color);
-    font-size:var(--text-size-h3) ;
-    text-align: center;
     display: flex;
     flex-direction: column;
     gap: 20px;
     align-items: center;
+}
+
+.card p {
+    font-family: "jaro";
+    color: var(--text-color);
+    font-size:var(--text-size-h3) ;
+    text-align: center;
 }
 
 .weatherEmoji{
