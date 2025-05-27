@@ -26,6 +26,7 @@ body{
     background-position: center;
     background-size: cover;
     margin: 0;
+    height: 100vh;
 }
 
 #popup-picture{
@@ -170,9 +171,9 @@ header{
 
 #section-3{
     display: flex;
-    gap: 35px;
     margin-left: 10px;
     margin-right: 10px;
+    justify-content: space-around;
 }
 
 .card{
@@ -181,7 +182,7 @@ header{
     background-color: var(--background-color);
     padding: 40px;
     height: 350px;
-    width: 100px;
+    width: 80px;
     display: flex;
     flex-direction: column;
     gap: 20px;
