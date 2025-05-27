@@ -1,105 +1,112 @@
+async function writeMessage(response, elementClass) {
+  const targetElement = document.querySelector(`.${elementClass}`);
+  if (!targetElement) return;
 
-function writeMessage(data){
-  let mainElement = document.querySelector("main");
+  let data;
+  try {
+    data = await response.json();
+  } catch {
+    data = { message: "No message from server." };
+  }
+
+  const pElement = document.createElement("p");
+  const prefix = response.ok ? "Success" : "Error";
+  pElement.textContent = `${prefix} | Status: ${response.status} | Message: ${data.message}`;
+  targetElement.appendChild(pElement);
 }
-
 
 const gifBox = document.getElementById("gif");
 
-async function register() {
-  const response = await fetch("http:localhost:8000/register", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username: "sun", password: "moon" }),
-  });
+async function runFlow() {
+  const username = "sunny";
+  const password = "moon";
+  let gifUrl;
 
-  const data = await response.json();
+  try {
+    const registerResponse = await fetch("http://localhost:8000/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    });
+    await writeMessage(registerResponse, "register");
 
-  if (response.status === 200) {
-    console.log("sucess", data);
-  } else {
-    console.log("user already exists, conflict", data);
-  }
-  login();
-}
-register();
+    //Förväntat felmeddelande
 
-async function login() {
-  const response = await fetch("http://localhost:8000/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username: "sun", password: "moon" }),
-  });
-
-  const data = await response.json();
-
-  if (response.status === 200) {
-    console.log("success", data);
-  } else if (response.status === 400) {
-    console.log("username and password required", data);
-  } else {
-    console.log("Invalid password", data);
-  }
- getGIF()
-}
-
-async function getGIF() {
-  let currentGifUrl;
-
-  const apiKey = "AIzaSyB0rByOPuVe1syMsx5CntyK69GUbPecxN8";
-  const searchTerm = "sunny weather";
-  const url = `https://tenor.googleapis.com/v2/search?q=${searchTerm}&key=${apiKey}&limit=1&random=true`;
-
-  const response = await fetch(url, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-  const data = await response.json();
-
-  currentGifUrl = data.results[0].media_formats.tinygif.url;
-  gifBox.innerHTML = "";
-
-  const img = document.createElement("img");
-  img.src = currentGifUrl;
-  img.style.width = "200px";
-  gifBox.appendChild(img);
-
-  console.log("GIF hämtad:", currentGifUrl);
-  saveGIF();
-}
+    const registerResponse2 = await fetch("http://localhost:8000/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    });
+    await writeMessage(registerResponse2, "register");
 
 
-async function saveGIF() {
-  const response = await fetch("http://localhost:8000/save-gif", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username: "sun", gifUrl:"https://media.tenor.com/hdf7HJw5TL0AAAAM/weather-nw.gif"}),
-  });
 
-  const data = await response.json();
+    const loginResponse = await fetch("http://localhost:8000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    });
+    await writeMessage(loginResponse, "Login");
 
-  if (response.status === 200) {
-    console.log("sucess, the GIF is saved", data);
-  } else {
-    console.log("user not found", data);
-  }
-  deleteGIF()
-}
 
-async function deleteGIF(){
-  const response = await fetch("http://localhost:8000/delete-gif", {
-    method: "DELETE",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({username: "sun", gifUrl: "https://media.tenor.com/hdf7HJw5TL0AAAAM/weather-nw.gif"})
-  })
+    //Förväntat felmeddelande
 
-  const data = await response.json()
 
-  if(response.status === 200){
-    console.log("delete succeeded", data)
-  } else {
-    console.log("user not found", data)
+    const username2 = "cloudy";
+
+    const loginResponse2 = await fetch("http://localhost:8000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username2, password }),
+    });
+    await writeMessage(loginResponse2, "Login");
+
+    
+
+
+    const apiKey = "AIzaSyB0rByOPuVe1syMsx5CntyK69GUbPecxN8";
+    const searchTerm = "sunny weather";
+    const gifResponse = await fetch(
+      `https://tenor.googleapis.com/v2/search?q=${searchTerm}&key=${apiKey}&limit=1&random=true`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
+    const gifData = await gifResponse.json();
+    gifUrl = gifData.results[0].media_formats.tinygif.url;
+
+    gifBox.innerHTML = "";
+    const img = document.createElement("img");
+    img.src = gifUrl;
+    img.style.width = "200px";
+    gifBox.appendChild(img);
+
+    const fakeSuccessResponse = new Response(
+      JSON.stringify({ message: "GIF hämtad" }),
+      { status: 200 }
+    );
+    await writeMessage(fakeSuccessResponse, "try-gif");
+
+    const saveResponse = await fetch("http://localhost:8000/save-gif", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, gifUrl }),
+    });
+    await writeMessage(saveResponse, "save-Gif");
+
+    const deleteResponse = await fetch("http://localhost:8000/delete-gif", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, gifUrl }),
+    });
+    await writeMessage(deleteResponse, "delete-Gif");
+
+  } catch (error) {
+    console.error("Catch-fel:", error);
   }
 }
 
+runFlow();
 
