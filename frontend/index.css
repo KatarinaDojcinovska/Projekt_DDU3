@@ -127,6 +127,13 @@ header{
     -webkit-text-stroke-color: white;
 }
 
+#compass {
+    color: var(--text-color2);
+    font-size:var(--text-size-h2);
+
+
+}
+
 #section-2{
     display: flex;
     justify-content: space-between;
