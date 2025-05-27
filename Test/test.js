@@ -17,7 +17,7 @@ async function writeMessage(response, elementClass) {
 
 const gifBox = document.getElementById("gif");
 
-async function runFlow() {
+async function testRun() {
   const username = "sunny";
   const password = "moon";
   let gifUrl;
@@ -108,5 +108,5 @@ async function runFlow() {
   }
 }
 
-runFlow();
+testRun();
 
