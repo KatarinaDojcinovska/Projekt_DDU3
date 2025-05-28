@@ -21,9 +21,6 @@
     src: url(./Font/Josefin_Slab/JosefinSlab-VariableFont_wght.ttf);
 }
 
-main {
-    display: none;
-}
 
 body{
     background-image: url(./Font/Images/Gemini_Generated_Image_igpahgigpahgigpa.jpg);
@@ -63,7 +60,7 @@ body{
     border-radius: 8px;
     height: 400px; /* ska bli auto*/
     width: 350px;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     background-color: var(--background-color);
@@ -153,7 +150,7 @@ button:hover, #savedGifs:hover {
 
 
 header{ /*ska bli none*/
-    display: none;
+    display: flex;
     justify-content: flex-end;
     margin-left: 40px;
     margin-right: 40px;
