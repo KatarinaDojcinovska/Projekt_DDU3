@@ -204,5 +204,83 @@ function fetchGif(word, callback) {
     });
 }
 
+//Show Saved Gifs
+document.getElementById("savedGifs").addEventListener("click", function () {
+  let user = localStorage.getItem("username");
+  if (!user) {
+    alert ("You have to be logged in to see saved GIFs");
+    return;
+  }
+
+  let box = document.getElementById("savedGifsBox");
+  let list = document.getElementById("savedGifsShell");
+
+  // Toggle visning
+  if (box.style.display === "flex") {
+    box.style.display = "none";
+    return;
+  } else {
+    box.style.display = "flex";
+  }
+
+  list.innerHTML = "";
+
+  fetch("http://localhost:8000/get-gifs?username=" + user)
+    .then(function (res) {
+      if (!res.ok) {
+        throw new Error("Can't bring GIFs");
+      }
+      return res.json();
+    })
+    .then(function(gifs) {
+      if (gifs.length === 0) {
+        list.innerHTML = "<p>No saved GIFs";
+        return;
+      }
+
+      for (let i = 0; i < gifs.length; i++) {
+        let gifUrl = gifs[i];
+
+        let wrapper = document.createElement("div");
+        wrapper.style.display = "flex";
+        wrapper.style.flexDirection = "column";
+        wrapper.style.alignItems = "center";
+        wrapper.style.marginBottom = "10px";
+
+        let img = document.createElement("img");
+        img.src = gifUrl;
+        img.style.maxWidth = "150px";
+
+        let delBtn = document.createElement("button");
+        delBtn.textContent = "Delete";
+        delBtn.className = "delete-gif";
+
+        delBtn.addEventListener("click", function() {
+          let conf = confirm("Do you want to remove this GIF?");
+          if (!conf) return;
+
+          fetch("http://localhost:8000/delete-gif", {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username: user, gifUrl: gifUrl })
+          })
+
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            alert(data.message);
+            wrapper.remove();
+          });
+        });
+        wrapper.appendChild(img);
+        wrapper.appendChild(delBtn);
+        list.appendChild(wrapper);
+      }
+    })
+    .catch(function (err) {
+      alert("Error with bringing GIFs");
+      console.error(err);
+    });
+});
+
 
 
