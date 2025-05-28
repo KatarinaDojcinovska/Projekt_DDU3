@@ -101,19 +101,6 @@ body{
     background-color: #c73750;
 }
 
-#savedGifsList {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-}
-
-#Divernskaliggahär {
-    background-color: black;
-    padding: 20px;
-    height: 50px;
-    width: 50px;
-}
-
 #deleteBtn {
     height: 30px;
     width: auto;
@@ -224,7 +211,6 @@ header{ /*ska bli none*/
     font-size:var(--text-size-h2);
     position: absolute;
     top: 72px;
-    left: 40px;
     font-family: "josefin";
 
 }
@@ -307,8 +293,8 @@ header{ /*ska bli none*/
 }
 
 .card.active {
-  height: 480px;
-  width: 150px;
+  height: 400px;
+  width: 350px;
   background-color: var(--background-color); /* Samma färg som alltid */
   box-shadow: 0 0 10px white;
 }
