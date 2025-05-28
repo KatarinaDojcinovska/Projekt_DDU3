@@ -248,7 +248,7 @@ header{ /*ska bli none*/
     border-radius: 10px;
     background-color: var(--background-color);
     padding: 40px;
-    height: 300;
+    height: 350px;
     width: 200px;
     display: flex;
     flex-direction: column;
@@ -257,11 +257,26 @@ header{ /*ska bli none*/
 }
 
 .card p {
-    font-family: "jaro";
     color: var(--text-color);
-    font-size:var(--text-size-h3) ;
     text-align: center;
+    margin-bottom: 0;
 }
+
+.dag {
+    font-family: "jaro";
+    font-size: 45px ;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #e54764 ;
+}
+
+
+.weatherTemp {
+    font-size: 35px ;
+    margin-top: 0;
+    font-family: "josefin";
+    font-weight: bold;
+}
+
 
 .weatherEmoji{
     width: 80px;
@@ -273,4 +288,5 @@ header{ /*ska bli none*/
     width: 80px;
     height: 100px;
     background-color: purple;
+    display: none;
 }
