@@ -311,11 +311,6 @@ header{ /*ska bli none*/
     font-weight: bold;
 }
 
-.weatherEmoji{
-    width: 80px;
-    height: 100px;
-    background-color: purple;
-}
 
 /*Anpassning för GIF + knapp inuti kort*/
 .weatherGIF {
