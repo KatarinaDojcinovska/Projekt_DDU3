@@ -6,7 +6,7 @@ export class WeatherClass {
     this.temp      = null;
     this.condition = "";
     this.error     = null;
-    this.lat       = null;  // <--- lägg till
+    this.lat       = null;  
     this.lon       = null;
   }
 
