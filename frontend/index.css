@@ -268,7 +268,7 @@ header{ /*ska bli none*/
     border: 3px solid var(--border-color);
     border-radius: 10px;
     background-color: var(--background-color);
-    padding: 40px;
+    padding: 20px;
     height: 350px;
     width: 200px;
     display: flex;
@@ -297,6 +297,8 @@ header{ /*ska bli none*/
   width: 350px;
   background-color: var(--background-color); /* Samma färg som alltid */
   box-shadow: 0 0 10px white;
+  box-sizing: border-box;
+  
 }
 
 .card.inactive {
@@ -326,7 +328,6 @@ header{ /*ska bli none*/
 }
 
 .weatherGIF img {
-  max-height: 150px;
   width: auto;
   max-width: 100%;
   border-radius: 10px;
