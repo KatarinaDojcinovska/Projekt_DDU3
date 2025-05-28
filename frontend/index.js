@@ -21,7 +21,7 @@ window.addEventListener("load", function() {
     currentData.condition = weather.condition;
 
     const p = document.createElement("p");
-    p.textContent = `${currentData.location} ${weather.lat}${weather.lon}`;
+    p.textContent = `${currentData.location} ${weather.lat}, ${weather.lon}`;
     compassDiv.appendChild(p);
 
     // ——— 2) Hämta 7-dagars-forecast med async/await ———
