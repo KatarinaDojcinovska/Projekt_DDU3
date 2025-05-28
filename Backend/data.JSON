@@ -3,7 +3,14 @@
     "id": "0",
     "name": "hej",
     "password": "hund",
-    "gif": []
+    "gif": [
+      "https://media.tenor.com/hdf7HJw5TL0AAAAM/weather-nw.gif",
+      "https://media.tenor.com/YxXFlg1skUgAAAAM/its-beautiful-nice-day.gif",
+      "https://media.tenor.com/lzrq3hbutp4AAAAM/sky-weather.gif",
+      "https://media.tenor.com/xnqXzIG8LvsAAAAM/1st-day-of-summer-happy-1st-day-of-summer.gif",
+      "https://media.tenor.com/tmMaULsQwFIAAAAM/littlest-friends-timothy-winchester.gif",
+      "https://media.tenor.com/-C-QgDBJkZAAAAAM/hottie-weather-forecast.gif"
+    ]
   },
   {
     "id": 1,
@@ -14,18 +21,21 @@
     "id": 2,
     "username": "lelo",
     "password": "hälsar",
-    "gif": []
+    "gif": [
+      "https://media.tenor.com/dMDoq1CqtiEAAAAM/winter-nope.gif",
+      "https://media.tenor.com/-C-QgDBJkZAAAAAM/hottie-weather-forecast.gif"
+    ]
   },
   {
     "id": 3,
-    "username": "sun",
-    "password": "moon",
-    "gif": []
-  },
-  {
-    "id": 4,
     "username": "sunny",
     "password": "moon",
-    "gif": []
+    "gif": [
+      "https://media.tenor.com/FHDWgTXGVhUAAAAM/to-hot.gif",
+      "https://media.tenor.com/-NJHCQmv_fwAAAAM/excessive-heat-warning-sunshine.gif",
+      "https://media.tenor.com/IH7_Boupcx4AAAAM/share-this-gif-sunny-weather.gif",
+      null,
+      null
+    ]
   }
 ]

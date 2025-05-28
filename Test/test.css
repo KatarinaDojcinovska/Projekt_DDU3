@@ -1,16 +1,28 @@
-body{
+body {
     display: flex;
     justify-content: center;
     background-color: #fbeae2;
-}
-
-main{
+    min-height: 100vh;   
+    align-items: center;        
+    margin: 0;
+  }
+  
+  main {
     display: flex;
     flex-direction: column;
     padding: 40px;
     gap: 70px;
-    width: 400px;
+    width: 800px;
     background-color: #B3E7F2;
-    align-items: center;
+    align-items: flex-start;   
     border-radius: 20px;
-}
+  }
+  
+  .register,
+  .Login,
+  .try-gif,
+  .save-Gif,
+  .delete-Gif {
+    width: 100%;               
+    text-align: left;          
+  }

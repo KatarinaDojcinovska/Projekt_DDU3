@@ -254,6 +254,8 @@ header{ /*ska bli none*/
     flex-direction: column;
     gap: 20px;
     align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .card p {
@@ -269,6 +271,17 @@ header{ /*ska bli none*/
     -webkit-text-stroke-color: #e54764 ;
 }
 
+.card.active {
+  height: 480px;
+  width: 150px;
+  background-color: var(--background-color); /* Samma färg som alltid */
+  box-shadow: 0 0 10px white;
+}
+
+.card.inactive {
+  transform: scale(0.85); /* Krymp lite visuellt */
+  opacity: 0.5;
+}
 
 .weatherTemp {
     font-size: 35px ;
@@ -277,16 +290,46 @@ header{ /*ska bli none*/
     font-weight: bold;
 }
 
-
 .weatherEmoji{
     width: 80px;
     height: 100px;
     background-color: purple;
 }
 
-.weatherGIF{
-    width: 80px;
-    height: 100px;
-    background-color: purple;
-    display: none;
+/*Anpassning för GIF + knapp inuti kort*/
+.weatherGIF {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  gap: 5px;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.weatherGIF img {
+  max-height: 150px;
+  width: auto;
+  max-width: 100%;
+  border-radius: 10px;
+  object-fit: contain;
+  margin-top: 5px;
+}
+
+.weatherGIF button {
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-family: "jaro";
+  font-size: 12px;
+  color: var(--text-color2);
+  width: 90px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.weatherGIF button:hover {
+  background-color: var(--background-color2);
 }
