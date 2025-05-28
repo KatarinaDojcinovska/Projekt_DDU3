@@ -1,5 +1,7 @@
 import { WeatherClass } from "./Classes/weatherClass.js";
 
+ let weeklyData  = [];
+
 window.addEventListener("load", function() {
   const weather    = new WeatherClass("59a2034ae4aa4ce49c6215358251305");
   const compassDiv = document.getElementById("compass");
@@ -7,8 +9,7 @@ window.addEventListener("load", function() {
 
   // Spara dagens och veckans data
   let currentData = { location: "", temp: null, condition: "" };
-  let weeklyData  = [];
-
+ 
   weather.getWeather(async function(err) {
     if (err) {
       console.error("Fel vid current-weather:", weather.error);
@@ -119,5 +120,89 @@ document.getElementById("login-button").addEventListener("click", async function
     alert("Inloggningen misslyckades.");
   }
 });
+
+// KLICKA o VISA GIF o SPARA GIF
+let cards = document.getElementsByClassName("card");
+
+for (let i = 0; i < cards.length; i++) {
+  cards[i].addEventListener("click", function () {
+    if (!weeklyData[i] || !weeklyData[i].condition) return;
+
+    let condition = weeklyData[i].condition;
+    let searchWord = translateCondition(condition);
+
+    let alreadyActive = cards[i].classList.contains("active");
+
+    // Nollställ alla kort
+    for (let j = 0; j < cards.length; j++) {
+      cards[j].classList.remove("active");
+      cards[j].classList.remove("inactive");
+      cards[j].querySelector(".weatherGIF").innerHTML = "";
+    }
+
+    if (!alreadyActive) {
+      cards[i].classList.add("active");
+
+      for (let k = 0; k < cards.length; k++) {
+        if (k !== i) cards[k].classList.add("inactive");
+      }
+
+      fetchGif(searchWord, function (gifUrl) {
+        let box = cards[i].querySelector(".weatherGIF");
+
+        let img = document.createElement("img");
+        img.src = gifUrl;
+
+        let saveBtn = document.createElement("button");
+        saveBtn.textContent = "Save GIF";
+
+        saveBtn.addEventListener("click", function () {
+          let user = localStorage.getItem("username");
+          if (!user) {
+            alert("Du måste logga in först");
+            return;
+          }
+
+          fetch("http://localhost:8000/save-gif", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username: user, gifUrl: gifUrl })
+          })
+          .then(function (res) { return res.json(); })
+          .then(function (data) { alert(data.message); });
+        });
+
+        box.appendChild(img);
+        box.appendChild(saveBtn);
+      });
+    }
+  });
+}
+
+function translateCondition(text) {
+  let t = text.toLowerCase();
+  if (t.includes("sun")) return "sunshine";
+  if (t.includes("cloud")) return "cloudy";
+  if (t.includes("rain")) return "rainy";
+  if (t.includes("snow")) return "snowy";
+  return "weather";
+}
+
+function fetchGif(word, callback) {
+  let url = "https://tenor.googleapis.com/v2/search?q=" +
+    word + "&key=AIzaSyB0rByOPuVe1syMsx5CntyK69GUbPecxN8&limit=1&random=true";
+
+  fetch(url)
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      let gifUrl = data.results[0].media_formats.tinygif.url;
+      callback(gifUrl);
+    })
+    .catch(function (err) {
+      console.log("GIF-fel:", err);
+      callback("");
+    });
+}
+
 
 

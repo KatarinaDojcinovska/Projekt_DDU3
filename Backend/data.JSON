@@ -14,7 +14,10 @@
     "id": 2,
     "username": "lelo",
     "password": "hälsar",
-    "gif": []
+    "gif": [
+      "https://media.tenor.com/dMDoq1CqtiEAAAAM/winter-nope.gif",
+      "https://media.tenor.com/-C-QgDBJkZAAAAAM/hottie-weather-forecast.gif"
+    ]
   },
   {
     "id": 3,
