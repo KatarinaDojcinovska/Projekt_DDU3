@@ -21,6 +21,9 @@
     src: url(./Font/Josefin_Slab/JosefinSlab-VariableFont_wght.ttf);
 }
 
+header {
+    position: relative;
+}
 
 body{
     background-image: url(./Font/Images/Gemini_Generated_Image_igpahgigpahgigpa.jpg);
@@ -56,14 +59,46 @@ body{
 }
 
 #savedGifsBox {
-    border: solid 5px var(--border-color);
-    border-radius: 8px;
-    height: 400px; /* ska bli auto*/
-    width: 350px;
     display: none;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     background-color: var(--background-color);
+    border: solid 2px var(--border-color);
+    border-radius: 8px;
+    padding: 10px;
+    width: 300px;
+    max-height: 300px; /* Begränsar höjden */
+    overflow-y: auto;  /* Gör skrollbar om innehåll är större än 300px */
+    margin-top: 10px;
+    z-index: 1002;      /* Visas ovanpå andra */
+    position: absolute; /* Så den inte är låst i body-scroll */
+    right: 20px;
+    top: 60px;
+}
+
+#savedGifsShell > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#savedGifsShell img {
+    max-width: 150px;
+    border-radius: 6px;
+}
+
+#savedGifsShell button {
+    margin-top: 5px;
+    background-color: #e54764;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#savedGifsShell button:hover {
+    background-color: #c73750;
 }
 
 #savedGifsList {
