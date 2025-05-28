@@ -1,46 +1,45 @@
-:root{
-    --text-color: #ffffff;
-    --text-color2: #F8ABB3;
-    --background-color: #fb90ad67;
-    --background-color2: #E6BCC6;
-    --border-color: #ffffff;
-    --text-size-h1: 80px;
-    --text-size-h2: 24px;
-    --text-size-h3: 20px;
-    --text-style: "jaro";
-}
-
-
-@font-face {
-    font-family: "jaro" ;
-    src: url(./Font/Jaro/Jaro-Regular-VariableFont_opsz.ttf);
+:root {
+  --text-color: #ffffff;
+  --text-color2: #f8abb3;
+  --background-color: #fb90ad67;
+  --background-color2: #e6bcc6;
+  --border-color: #ffffff;
+  --text-size-h1: 80px;
+  --text-size-h2: 24px;
+  --text-size-h3: 20px;
+  --text-style: "jaro";
 }
 
 @font-face {
-    font-family: "josefin" ;
-    src: url(./Font/Josefin_Slab/JosefinSlab-VariableFont_wght.ttf);
+  font-family: "jaro";
+  src: url(./Font/Jaro/Jaro-Regular-VariableFont_opsz.ttf);
+}
+
+@font-face {
+  font-family: "josefin";
+  src: url(./Font/Josefin_Slab/JosefinSlab-VariableFont_wght.ttf);
 }
 
 header {
-    position: relative;
+  position: relative;
 }
 
-body{
-    background-image: url(./Font/Images/Gemini_Generated_Image_igpahgigpahgigpa.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    margin: 0;
-    height: 100vh;
-    overflow: hidden; /* förhindrar scroll */
-
+body {
+  background-image: url(./Font/Images/Gemini_Generated_Image_igpahgigpahgigpa.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  margin: 0;
+  height: 100vh;
+  overflow: hidden; /* förhindrar scroll */
 }
 
-#popUPwrapper { /*ska bli none*/
+#popUPwrapper {
+  /*ska bli none*/
   display: none;
   justify-content: center;
   align-items: center;
-  height: 100vh;     /* viktigt */
+  height: 100vh; /* viktigt */
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.3); /* valfritt: overlay */
 }
@@ -59,237 +58,239 @@ body{
 }
 
 #savedGifsBox {
-    display: none;
-    flex-direction: column;
-    background-color: var(--background-color);
-    border: solid 2px var(--border-color);
-    border-radius: 8px;
-    padding: 10px;
-    width: 300px;
-    max-height: 300px; /* Begränsar höjden */
-    overflow-y: auto;  /* Gör skrollbar om innehåll är större än 300px */
-    margin-top: 10px;
-    z-index: 1002;      /* Visas ovanpå andra */
-    position: absolute; /* Så den inte är låst i body-scroll */
-    right: 20px;
-    top: 60px;
+  display: none;
+  flex-direction: column;
+  background-color: var(--background-color);
+  border: solid 2px var(--border-color);
+  border-radius: 8px;
+  padding: 10px;
+  width: 300px;
+  max-height: 300px; /* Begränsar höjden */
+  overflow-y: auto; /* Gör skrollbar om innehåll är större än 300px */
+  margin-top: 10px;
+  z-index: 1002; /* Visas ovanpå andra */
+  position: absolute; /* Så den inte är låst i body-scroll */
+  right: 20px;
+  top: 60px;
 }
 
 #savedGifsShell > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 #savedGifsShell img {
-    max-width: 150px;
-    border-radius: 6px;
+  max-width: 150px;
+  border-radius: 6px;
 }
 
 #savedGifsShell button {
-    margin-top: 5px;
-    background-color: #e54764;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-#savedGifsShell button:hover {
-    background-color: #c73750;
-}
-
-#deleteBtn {
-    height: 30px;
-    width: auto;
-    margin-left: 10px;
-    border-radius: 5px;
-    font-size: 12px;
-}
-
-#deleteBtn:hover {
-    background-color: #e54764;
-}
-
-#login, #register {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 40px;
-}
-
-#border-line {
-    height: 343px;
-    border: solid 4px white;
-    border-radius: 5px;
-}
-
-h2{
-    font-family: "jaro";
-    color: var(--text-color);
-    font-size: 35px;
-    margin-bottom: 0;
-    letter-spacing: 2px; /* justera detta värde efter behov */
-    -webkit-text-stroke: 0.5px var(--text-color2);    /* Kantlinje runt bokstäver */
-
-}
-
-input{
-    height: 30px;
-    width: 250px;
-    border-radius: 6px;
-    border: none; /* ← detta tar bort standardborden */
-    outline: none; /* valfritt: tar bort blå kant vid fokus */
-}
-
-input::placeholder {
-    color: rgb(142, 107, 107);
-    padding-left: 3px;
-}
-
-input:focus, button:active, #savedGifs:active {
-    border: solid 2px #e54764;
-    box-shadow: 0 0 6px #e4546f;
-}
-
-button{
-    background-color: var(--background-color2);
-    border: 2px solid var(--border-color);
-    border-radius: 18px;
-    width: 150px;
-    height: 40px;
-    font-family: "josefin";
-    color: var(--text-color);
-    font-size: var(--text-size-h3);
-    font-weight: bold;
-}
-
-button:hover, #savedGifs:hover {
-    background-color: var(--background-color);
-}
-
-
-header{ /*ska bli none*/
-    display: flex;
-    justify-content: space-between;
-    margin-left: 40px;
-    margin-right: 40px;
-    color: var(--text-color);
-    align-items: flex-start;
-    font-family: "josefin" ;
-    font-size: var(--text-size-h3);
-    font-weight: bold;
-}
-
-#savedGifs {
-    border: solid 2px var(--border-color);
-    padding: 10px;
-    border-radius: 10px;
-}
-
-
-#location-part{
-    display: flex;
-    gap: 20px;
-    flex-direction: column;
-}
-
-#location{
-    font-family: "jaro";
-    font-size:var(--text-size-h1);
-    margin: 0;
-    margin-bottom: 70px;
-    color: var(--text-color2);
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: white;
-}
-
-#compass {
-    color: var(--text-color);
-    font-size:var(--text-size-h2);
-    position: absolute;
-    top: 72px;
-    font-family: "josefin";
-
-}
-
-#section-2{
-    display: flex;
-    justify-content: space-between;
-    margin-right: 40px;
-    margin-left: 40px;
-    color: var(--text-color);
-    font-family: "josefin" ;
-    font-size: var(--text-size-h3);
-    align-items: center; 
-
-}
-
-#week-part {
-    display: flex;
-    align-items: center;
-    gap: 10px; 
-}
-
-#arrow {
-    width: 20px;  
-    height: auto;
-    object-fit: contain;
-    margin-bottom: 2px; /* justera position om den fortfarande sticker ut lite */
-}
-
-#section-2 h3{
-    margin-top: 0;
-}
-
-#clickPart {
-    display: flex;
-    align-items: center;
-    gap: 0px;
-}
-
-#clicky {
-    width: 40px;  
-    height: auto;
-    object-fit: contain;
-    margin-bottom: 6px;
-}
-
-#section-3{
-    display: flex;
-    margin-left: 10px;
-    margin-right: 10px;
-    justify-content: space-around;
-}
-
-.card{
-    border: 3px solid var(--border-color);
-    border-radius: 10px;
-    background-color: var(--background-color);
-    padding: 20px;
-    height: 350px;
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-  transition: all 0.3s ease;
+  margin-top: 5px;
+  background-color: #e54764;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
   cursor: pointer;
 }
 
+#savedGifsShell button:hover {
+  background-color: #c73750;
+}
+
+#deleteBtn {
+  height: 30px;
+  width: auto;
+  margin-left: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+#deleteBtn:hover {
+  background-color: #e54764;
+}
+
+#login,
+#register {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 40px;
+}
+
+#border-line {
+  height: 343px;
+  border: solid 4px white;
+  border-radius: 5px;
+}
+
+h2 {
+  font-family: "jaro";
+  color: var(--text-color);
+  font-size: 35px;
+  margin-bottom: 0;
+  letter-spacing: 2px; /* justera detta värde efter behov */
+  -webkit-text-stroke: 0.5px var(--text-color2); /* Kantlinje runt bokstäver */
+}
+
+input {
+  height: 30px;
+  width: 250px;
+  border-radius: 6px;
+  border: none; /* ← detta tar bort standardborden */
+  outline: none; /* valfritt: tar bort blå kant vid fokus */
+}
+
+input::placeholder {
+  color: rgb(142, 107, 107);
+  padding-left: 3px;
+}
+
+input:focus,
+button:active,
+#savedGifs:active {
+  border: solid 2px #e54764;
+  box-shadow: 0 0 6px #e4546f;
+}
+
+button {
+  background-color: var(--background-color2);
+  border: 2px solid var(--border-color);
+  border-radius: 18px;
+  width: 150px;
+  height: 40px;
+  font-family: "josefin";
+  color: var(--text-color);
+  font-size: var(--text-size-h3);
+  font-weight: bold;
+}
+
+button:hover,
+#savedGifs:hover {
+  background-color: var(--background-color);
+}
+
+header {
+  /*ska bli none*/
+  display: flex;
+  justify-content: space-between;
+  margin-left: 40px;
+  margin-right: 40px;
+  color: var(--text-color);
+  align-items: flex-start;
+  font-family: "josefin";
+  font-size: var(--text-size-h3);
+  font-weight: bold;
+}
+
+#savedGifs {
+  border: solid 2px var(--border-color);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#location-part {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
+
+#location {
+  font-family: "jaro";
+  font-size: var(--text-size-h1);
+  margin: 0;
+  margin-bottom: 70px;
+  color: var(--text-color2);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+}
+
+#compass {
+  color: var(--text-color);
+  font-size: var(--text-size-h2);
+  position: absolute;
+  top: 72px;
+  font-family: "josefin";
+}
+
+#section-2 {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 40px;
+  margin-left: 40px;
+  color: var(--text-color);
+  font-family: "josefin";
+  font-size: var(--text-size-h3);
+  align-items: center;
+}
+
+#week-part {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#arrow {
+  width: 20px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 2px; /* justera position om den fortfarande sticker ut lite */
+}
+
+#section-2 h3 {
+  margin-top: 0;
+}
+
+#clickPart {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+}
+
+#clicky {
+  width: 40px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 6px;
+}
+
+#section-3 {
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+  justify-content: space-around;
+}
+
+.card {
+  border: 3px solid var(--border-color);
+  border-radius: 10px;
+  background-color: var(--background-color);
+  padding: 10px;
+  height: 350px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+ 
+}
+
 .card p {
-    color: var(--text-color);
-    text-align: center;
-    margin-bottom: 0;
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 0;
+  margin-top: 15px;
 }
 
 .dag {
-    font-family: "jaro";
-    font-size: 45px ;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #e54764 ;
+  font-family: "jaro";
+  font-size: 45px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #e54764;
 }
 
 .card.active {
@@ -297,8 +298,6 @@ header{ /*ska bli none*/
   width: 350px;
   background-color: var(--background-color); /* Samma färg som alltid */
   box-shadow: 0 0 10px white;
-  box-sizing: border-box;
-  
 }
 
 .card.inactive {
@@ -307,12 +306,11 @@ header{ /*ska bli none*/
 }
 
 .weatherTemp {
-    font-size: 35px ;
-    margin-top: 0;
-    font-family: "josefin";
-    font-weight: bold;
+  font-size: 35px;
+  margin-top: 0;
+  font-family: "josefin";
+  font-weight: bold;
 }
-
 
 /*Anpassning för GIF + knapp inuti kort*/
 .weatherGIF {
@@ -320,16 +318,14 @@ header{ /*ska bli none*/
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  gap: 5px;
-  width: 100%;
-  height: 200px;
+  gap: 20px;
   overflow: hidden;
   background-color: transparent;
 }
 
 .weatherGIF img {
-  width: auto;
-  max-width: 100%;
+  width: 260px;
+  height: 160px;
   border-radius: 10px;
   object-fit: contain;
   margin-top: 5px;

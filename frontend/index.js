@@ -162,6 +162,7 @@ for (let i = 0; i < cards.length; i++) {
         let saveBtn = document.createElement("button");
         saveBtn.textContent = "Save GIF";
 
+
         saveBtn.addEventListener("click", function () {
           let user = localStorage.getItem("username");
           if (!user) {
