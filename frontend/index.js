@@ -29,7 +29,7 @@ window.addEventListener("load", function() {
       const forecastUrl =
         `https://api.weatherapi.com/v1/forecast.json?key=${weather.apiKey}` +
         `&q=${weather.lat},${weather.lon}` +
-        `&days=7&aqi=no&alerts=no`;
+        `&days=3&aqi=no&alerts=no`;
 
       const res  = await fetch(forecastUrl);
       if (!res.ok) throw new Error("Status " + res.status);
@@ -45,10 +45,16 @@ window.addEventListener("load", function() {
           condition: day.day.condition.text
         });
       }
+
+      const dag = document.getElementsByClassName("dag");
       // Fyll i alla dina <p class="weatherTemp">
       for (let i = 0; i < tempEls.length && i < weeklyData.length; i++) {
         tempEls[i].textContent = weeklyData[i].temp + "°C";
-      }
+        const dateObject = new Date(weeklyData[i].date);
+        const dayOfMonth = dateObject.getDate();
+        const monthName = dateObject.toLocaleDateString("en-US", { month: "long" });
+        dag[i].textContent = `${dayOfMonth} ${monthName}`;
+}
 
       console.log("Current data:", currentData);
       console.log("Weekly data:", weeklyData);
