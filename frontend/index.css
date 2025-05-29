@@ -20,10 +20,6 @@
   src: url(./Font/Josefin_Slab/JosefinSlab-VariableFont_wght.ttf);
 }
 
-header {
-  position: relative;
-}
-
 body {
   background-image: url(./Font/Images/Gemini_Generated_Image_igpahgigpahgigpa.jpg);
   background-repeat: no-repeat;
@@ -34,9 +30,13 @@ body {
   overflow: hidden; /* förhindrar scroll */
 }
 
-#popUPwrapper {
-  /*ska bli none*/
+main {
   display: none;
+  flex-direction: column;
+}
+
+#popUPwrapper {
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh; /* viktigt */
@@ -173,8 +173,7 @@ button:hover,
 }
 
 header {
-  /*ska bli none*/
-  display: flex;
+  display: none;
   justify-content: space-between;
   margin-left: 40px;
   margin-right: 40px;
@@ -345,4 +344,9 @@ header {
 
 .weatherGIF button:hover {
   background-color: var(--background-color2);
+}
+
+.weatherEmoji img{
+  height: 200px;
+  width: 175px;
 }

@@ -1,63 +1,131 @@
 import { WeatherClass } from "./Classes/weatherClass.js";
 
- let weeklyData  = [];
+// 1) Definiera bildlistor per condition
+const imagesByCondition = {
+  cloudy: [
+    "./Font/Icons/Cloudy/cloudy1.png",
+    "./Font/Icons/Cloudy/cloudy2.png",
+    "./Font/Icons/Cloudy/cloudy3.png",
+    "./Font/Icons/Cloudy/cloudy4.png"
+  ],
+
+  rainy: [
+    "./Font/Icons/Rainy/rainy1.png",
+    "./Font/Icons/Rainy/rainy2.png",
+    "./Font/Icons/Rainy/rainy3.png",
+    "./Font/Icons/Rainy/rainy4.png"
+  ],
+
+  snow: [
+    "./Font/Icons/snow/snow1.png",
+    "./Font/Icons/snow/snow2.png",
+    "./Font/Icons/snow/snow3.png",
+    "./Font/Icons/snow/snow4.png"
+  ],
+
+  sunny: [
+    "./Font/Icons/Sunny/sunny1.png",
+    "./Font/Icons/Sunny/sunny2.png",
+    "./Font/Icons/Sunny/sunny3.png",
+    "./Font/Icons/Sunny/sunny4.png"
+  ],
+
+  thunder: [
+    "./Font/Icons/thunder/thunder1.png",
+    "./Font/Icons/thunder/thunder2.png",
+    "./Font/Icons/thunder/thunder3.png",
+    "./Font/Icons/thunder/thunder4.png"
+  ]
+};
+
+
+// 2) Funktion för att välja slumpad ikon 
+function getRandomImageForCondition(condition) {
+  const cond = condition.toLowerCase();
+  const keys = Object.keys(imagesByCondition);
+
+  let keyFound = null;
+  for (let k = 0; k < keys.length; k++) {
+    if (cond.includes(keys[k])) {
+      keyFound = keys[k];
+      break;
+    }
+  }
+
+  let list;
+  if (keyFound !== null) {
+    list = imagesByCondition[keyFound];
+  } else {
+    list = imagesByCondition.cloudy;
+  }
+
+  const idx = Math.floor(Math.random() * list.length);
+  const img = new Image();
+  img.src = list[idx];
+  return img;
+}
 
 window.addEventListener("load", function() {
   const weather    = new WeatherClass("59a2034ae4aa4ce49c6215358251305");
   const compassDiv = document.getElementById("compass");
   const tempEls    = document.getElementsByClassName("weatherTemp");
+  const dateEls    = document.getElementsByClassName("dag");
+  const iconEls    = document.getElementsByClassName("weatherEmoji");
 
-  // Spara dagens och veckans data
   let currentData = { location: "", temp: null, condition: "" };
- 
+  let weeklyData  = [];
+
   weather.getWeather(async function(err) {
     if (err) {
       console.error("Fel vid current-weather:", weather.error);
       return;
     }
 
-    // ——— 1) Visa “current” ———
-    currentData.location  = weather.location;
-    currentData.temp      = weather.temp;
-    currentData.condition = weather.condition;
-
+    // Visa current-location
+    currentData.location = weather.location;
     const p = document.createElement("p");
-    p.textContent = `${currentData.location} ${weather.lat}, ${weather.lon}`;
+    p.textContent = `${weather.location} (${weather.lat}, ${weather.lon})`;
     compassDiv.appendChild(p);
 
-    // ——— 2) Hämta 7-dagars-forecast med async/await ———
+    // Hämta forecast (3 dagar gratis)
     try {
-      const forecastUrl =
+      const url =
         `https://api.weatherapi.com/v1/forecast.json?key=${weather.apiKey}` +
         `&q=${weather.lat},${weather.lon}` +
         `&days=3&aqi=no&alerts=no`;
 
-      const res  = await fetch(forecastUrl);
+      const res = await fetch(url);
       if (!res.ok) throw new Error("Status " + res.status);
       const data = await res.json();
-      
-      weeklyData = [];  // töm arrayen först
+
+      // Bygg weeklyData
       const daysArray = data.forecast.forecastday;
       for (let i = 0; i < daysArray.length; i++) {
         const day = daysArray[i];
         weeklyData.push({
-          date: day.date,
-          temp: day.day.avgtemp_c,
+          date:      day.date,
+          temp:      day.day.avgtemp_c,
           condition: day.day.condition.text
         });
       }
 
-      const dag = document.getElementsByClassName("dag");
-      // Fyll i alla dina <p class="weatherTemp">
+      // 3) Fyll i temperatur, datum OCH ikon i samma loop
       for (let i = 0; i < tempEls.length && i < weeklyData.length; i++) {
+        // Temperatur
         tempEls[i].textContent = weeklyData[i].temp + "°C";
-        const dateObject = new Date(weeklyData[i].date);
-        const dayOfMonth = dateObject.getDate();
-        const monthName = dateObject.toLocaleDateString("en-US", { month: "long" });
-        dag[i].textContent = `${dayOfMonth} ${monthName}`;
-}
 
-      console.log("Current data:", currentData);
+        // Datum: dag + månad
+        const dt = new Date(weeklyData[i].date);
+        const dayOfMonth = dt.getDate();
+        const monthName  = dt.toLocaleDateString("en-US", { month: "long" });
+        dateEls[i].textContent = `${dayOfMonth} ${monthName}`;
+
+        // Ikon baserat på condition
+        iconEls[i].innerHTML = "";                    // rensa gammal
+        const img = getRandomImageForCondition(weeklyData[i].condition);
+        iconEls[i].appendChild(img);
+      }
+
       console.log("Weekly data:", weeklyData);
 
     } catch (err) {
@@ -89,7 +157,9 @@ document.getElementById("register-button").addEventListener("click", async funct
     localStorage.setItem("username", username);
     currentUser = username;
     alert("Registrering lyckades!");
-    document.getElementById("popup").style.display = "none";
+    document.getElementById("popUPwrapper").style.display = "none";
+    document.querySelector("header").style.display = "flex";
+    document.querySelector("main").style.display   = "flex";
   } else if (res.status === 409) {
     alert("Användarnamnet finns redan.");
   } else {
@@ -117,7 +187,9 @@ document.getElementById("login-button").addEventListener("click", async function
     localStorage.setItem("username", username);
     currentUser = username;
     alert("Inloggning lyckades!");
-    document.getElementById("popup").style.display = "none";
+    document.getElementById("popUPwrapper").style.display = "none";
+    document.querySelector("header").style.display = "flex";
+    document.querySelector("main").style.display   = "flex";
   } else if (res.status === 401) {
     alert("Fel lösenord.");
   } else if (res.status === 404) {
