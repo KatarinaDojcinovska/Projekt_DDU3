@@ -1,5 +1,5 @@
 import { WeatherClass } from "./Classes/weatherClass.js";
-
+let weeklyData = [];
 // 1) Definiera bildlistor per condition
 const imagesByCondition = {
   cloudy: [
