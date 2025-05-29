@@ -73,7 +73,6 @@ window.addEventListener("load", function() {
   const iconEls    = document.getElementsByClassName("weatherEmoji");
 
   let currentData = { location: "", temp: null, condition: "" };
-  let weeklyData  = [];
 
   weather.getWeather(async function(err) {
     if (err) {
