@@ -1,4 +1,3 @@
-
 const gifBox = document.getElementById("gif");
 
 async function writeMessage(response, elementClass) {
@@ -15,8 +14,13 @@ async function writeMessage(response, elementClass) {
   const pElement = document.createElement("p");
   const prefix = response.ok ? "Success" : "Error";
 
-  const message =
-    data.message || data.error || JSON.stringify(data);
+  let message = data.message;
+  if (!message) {
+    message = data.error;
+  }
+  if (!message) {
+    message = JSON.stringify(data);
+  }
 
   pElement.textContent = `${prefix} | Status: ${response.status} | Message: ${message}`;
   targetElement.appendChild(pElement);
@@ -25,12 +29,11 @@ async function writeMessage(response, elementClass) {
 async function testRun() {
   const username = "sunny";
   const password = "moon";
-  const username2 = "cloudy"; 
+  const username2 = "cloudy";
   let gifUrl;
 
   try {
-
-    // Första registrering - ska fungera
+    // Första registrering - Ska fungera men låt json-fil vara tom
     const registerResponse = await fetch("http://localhost:8000/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -54,7 +57,7 @@ async function testRun() {
     });
     await writeMessage(loginResponse, "Login");
 
-    // Saknar username → 400
+    // Saknar username
     const loginResponse2 = await fetch("http://localhost:8000/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -62,7 +65,7 @@ async function testRun() {
     });
     await writeMessage(loginResponse2, "Login");
 
-    // Felaktigt username → 404
+    // Felaktigt username
     const loginResponse3 = await fetch("http://localhost:8000/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -70,7 +73,7 @@ async function testRun() {
     });
     await writeMessage(loginResponse3, "Login");
 
-    // Felaktigt lösenord → 401
+    // Felaktigt lösenord
     const password2 = "heythere";
     const loginResponse4 = await fetch("http://localhost:8000/login", {
       method: "POST",
@@ -114,7 +117,7 @@ async function testRun() {
     );
     await writeMessage(fakeSuccessResponse, "try-gif");
 
-    // Spara GIF till backend
+    // Spara GIF till användaren
     const saveResponse = await fetch("http://localhost:8000/save-gif", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -122,14 +125,13 @@ async function testRun() {
     });
     await writeMessage(saveResponse, "save-Gif");
 
-    //Gif ska ge felmeddalnde - användaren finns inte
+    // Gif ska ge felmeddelande - användaren finns inte
     const saveResponse2 = await fetch("http://localhost:8000/save-gif", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: username2, gifUrl }),
     });
     await writeMessage(saveResponse2, "save-Gif");
-
 
     // Radera GIF
     const deleteResponse = await fetch("http://localhost:8000/delete-gif", {
@@ -139,31 +141,18 @@ async function testRun() {
     });
     await writeMessage(deleteResponse, "delete-Gif");
 
-    //Ska ge felmeddelande - användaren finns inte
+    // Ska ge felmeddelande - användaren finns inte
     const deleteResponse2 = await fetch("http://localhost:8000/delete-gif", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: username2, gifUrl }),
     });
     await writeMessage(deleteResponse2, "delete-Gif");
-
-    // Radera GIF utan username
-    const deleteNonExistingUser = await fetch("http://localhost:8000/delete-gif", {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: "doesnotexist",
-        gifUrl: "https://example.com/test.gif"
-      }),
-    });
-    await writeMessage(deleteNonExistingUser, "delete-Gif");
-
-
-
   } catch (error) {
     console.error("Catch-fel:", error);
   }
 }
 
 testRun();
+
 
