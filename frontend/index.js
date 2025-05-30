@@ -3,38 +3,38 @@ let weeklyData = [];
 // 1) Definiera bildlistor per condition
 const imagesByCondition = {
   cloudy: [
-    "./Font/Icons/Cloudy/cloudy1.png",
-    "./Font/Icons/Cloudy/cloudy2.png",
-    "./Font/Icons/Cloudy/cloudy3.png",
-    "./Font/Icons/Cloudy/cloudy4.png"
+    "./assets/Icons/Cloudy/cloudy1.png",
+    "./assets/Icons/Cloudy/cloudy2.png",
+    "./assets/Icons/Cloudy/cloudy3.png",
+    "./assets/Icons/Cloudy/cloudy4.png"
   ],
 
   rainy: [
-    "./Font/Icons/Rainy/rainy1.png",
-    "./Font/Icons/Rainy/rainy2.png",
-    "./Font/Icons/Rainy/rainy3.png",
-    "./Font/Icons/Rainy/rainy4.png"
+    "./assets/Icons/Rainy/rainy1.png",
+    "./assets/Icons/Rainy/rainy2.png",
+    "./assets/Icons/Rainy/rainy3.png",
+    "./assets/Icons/Rainy/rainy4.png"
   ],
 
   snow: [
-    "./Font/Icons/snow/snow1.png",
-    "./Font/Icons/snow/snow2.png",
-    "./Font/Icons/snow/snow3.png",
-    "./Font/Icons/snow/snow4.png"
+    "./assets/Icons/snow/snow1.png",
+    "./assets/Icons/snow/snow2.png",
+    "./assets/Icons/snow/snow3.png",
+    "./assets/Icons/snow/snow4.png"
   ],
 
   sunny: [
-    "./Font/Icons/Sunny/sunny1.png",
-    "./Font/Icons/Sunny/sunny2.png",
-    "./Font/Icons/Sunny/sunny3.png",
-    "./Font/Icons/Sunny/sunny4.png"
+    "./assets/Icons/Sunny/sunny1.png",
+    "./assets/Icons/Sunny/sunny2.png",
+    "./assets/Icons/Sunny/sunny3.png",
+    "./assets/Icons/Sunny/sunny4.png"
   ],
 
   thunder: [
-    "./Font/Icons/thunder/thunder1.png",
-    "./Font/Icons/thunder/thunder2.png",
-    "./Font/Icons/thunder/thunder3.png",
-    "./Font/Icons/thunder/thunder4.png"
+    "./assets/Icons/thunder/thunder1.png",
+    "./assets/Icons/thunder/thunder2.png",
+    "./assets/Icons/thunder/thunder3.png",
+    "./assets/Icons/thunder/thunder4.png"
   ]
 };
 
