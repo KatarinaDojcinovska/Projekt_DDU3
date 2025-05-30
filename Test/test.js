@@ -1,4 +1,6 @@
 
+const gifBox = document.getElementById("gif");
+
 async function writeMessage(response, elementClass) {
   const targetElement = document.querySelector(`.${elementClass}`);
   if (!targetElement) return;
@@ -14,13 +16,11 @@ async function writeMessage(response, elementClass) {
   const prefix = response.ok ? "Success" : "Error";
 
   const message =
-    data.message || data.error || data.detail || JSON.stringify(data);
+    data.message || data.error || JSON.stringify(data);
 
   pElement.textContent = `${prefix} | Status: ${response.status} | Message: ${message}`;
   targetElement.appendChild(pElement);
 }
-
-const gifBox = document.getElementById("gif");
 
 async function testRun() {
   const username = "sunny";
