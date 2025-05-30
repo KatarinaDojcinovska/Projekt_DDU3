@@ -2,12 +2,13 @@ import { serveDir } from "https://deno.land/std@0.224.0/http/file_server.ts";
 import { CreateUserClass } from "../frontend/Classes/userClass.js";
 
 function getCORSHeaders() {
-  const headers = new Headers();
-  headers.set("Access-Control-Allow-Origin", "*");
-  headers.set("Access-Control-Allow-Headers", "*");
-  headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  headers.set("Content-Type", "application/json");
-  return headers;
+  const headers = {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS, DELETE",
+      "Access-Control-Allow-Headers": "Content-Type",
+    };
+    return headers;
 }
 
 function readUsers() {
