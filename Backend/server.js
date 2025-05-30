@@ -147,4 +147,3 @@ async function handler(request) {
 
 console.log("Servern kör på http://localhost:8000");
 Deno.serve(handler);
-
