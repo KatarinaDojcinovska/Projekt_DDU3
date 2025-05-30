@@ -24,8 +24,10 @@
     "username": "lelo",
     "password": "hälsar",
     "gif": [
-      "https://media.tenor.com/dMDoq1CqtiEAAAAM/winter-nope.gif",
-      "https://media.tenor.com/-C-QgDBJkZAAAAAM/hottie-weather-forecast.gif"
+      "https://media.tenor.com/-C-QgDBJkZAAAAAM/hottie-weather-forecast.gif",
+      "https://media.tenor.com/CiipAmUx4FIAAAAM/raining-its-raining.gif",
+      "https://media.tenor.com/KcosOIgsurUAAAAM/cat-sun.gif",
+      "https://media.tenor.com/yoqJ8-zxrqUAAAAM/lalala-hepihepi.gif"
     ]
   },
   {
@@ -36,6 +38,15 @@
       "https://media.tenor.com/FHDWgTXGVhUAAAAM/to-hot.gif",
       "https://media.tenor.com/-NJHCQmv_fwAAAAM/excessive-heat-warning-sunshine.gif",
       "https://media.tenor.com/IH7_Boupcx4AAAAM/share-this-gif-sunny-weather.gif"
+    ]
+  },
+  {
+    "id": 4,
+    "username": "katta",
+    "password": "wallen",
+    "gif": [
+      "https://media.tenor.com/UCwvi9G9Gj0AAAAM/yu-leave.gif",
+      "https://media.tenor.com/2k0FYDzal9EAAAAM/good-morning-morning.gif"
     ]
   }
 ]
