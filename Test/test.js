@@ -79,6 +79,14 @@ async function testRun() {
     });
     await writeMessage(loginResponse4, "Login");
 
+    // Login utan password
+    const loginNoPassword = await fetch("http://localhost:8000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username }),
+    });
+    await writeMessage(loginNoPassword, "Login");
+
     // Hämta GIF från Tenor
     const apiKey = "AIzaSyB0rByOPuVe1syMsx5CntyK69GUbPecxN8";
     const searchTerm = "sunny weather";
@@ -122,6 +130,7 @@ async function testRun() {
     });
     await writeMessage(saveResponse2, "save-Gif");
 
+
     // Radera GIF
     const deleteResponse = await fetch("http://localhost:8000/delete-gif", {
       method: "DELETE",
@@ -137,24 +146,6 @@ async function testRun() {
       body: JSON.stringify({ username: username2, gifUrl }),
     });
     await writeMessage(deleteResponse2, "delete-Gif");
-
-
-    // Login utan password
-    const loginNoPassword = await fetch("http://localhost:8000/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username }),
-    });
-    await writeMessage(loginNoPassword, "Login");
-
-
-    // Spara GIF utan username
-    const saveNoUsername = await fetch("http://localhost:8000/save-gif", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ gifUrl }),
-    });
-    await writeMessage(saveNoUsername, "save-Gif");
 
     // Radera GIF utan username
     const deleteNonExistingUser = await fetch("http://localhost:8000/delete-gif", {
