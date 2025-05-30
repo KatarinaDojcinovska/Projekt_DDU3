@@ -63,9 +63,13 @@ async function handler(request) {
       return new Response(JSON.stringify({ message: "User already exists" }), { status: 409, headers });
     }
 
-    const maxId = users.reduce(function (max, u) {
-      return Math.max(max, Number(u.id));
-    }, 0);
+    let maxId = 0;
+       for (const u of users) {
+         const id = Number(u.id);
+         if (id > maxId) {
+         maxId = id;
+        }
+       }
 
     const newId = maxId + 1;
     const newUser = new CreateUserClass(newId, body.username, body.password, []);
