@@ -297,6 +297,11 @@ main {
   margin: 15px 0 0 0;
 }
 
+/* 1) Always hide the emoji when the card is active */
+.card.active .weatherEmoji {
+  display: none;
+}
+
 .dag {
   font-family: "jaro";
   font-size: 45px;

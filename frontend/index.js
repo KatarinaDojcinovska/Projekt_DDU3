@@ -215,6 +215,8 @@ for (let i = 0; i < cards.length; i++) {
       cards[j].classList.remove("active");
       cards[j].classList.remove("inactive");
       cards[j].querySelector(".weatherGIF").innerHTML = "";
+      const e = cards[j].querySelector(".weatherEmoji");
+      if (e) e.style.display = "";
     }
 
     if (!alreadyActive) {
@@ -223,6 +225,10 @@ for (let i = 0; i < cards.length; i++) {
       for (let k = 0; k < cards.length; k++) {
         if (k !== i) cards[k].classList.add("inactive");
       }
+
+      const emojiDiv = cards[i].querySelector(".weatherEmoji");
+      if (emojiDiv) emojiDiv.style.display = "none";
+
 
       fetchGif(searchWord, function (gifUrl) {
         let box = cards[i].querySelector(".weatherGIF");
