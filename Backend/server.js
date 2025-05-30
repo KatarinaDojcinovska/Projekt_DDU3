@@ -1,5 +1,5 @@
 import { serveDir } from "https://deno.land/std@0.224.0/http/file_server.ts";
-import { CreateUserClass } from "../frontend/Classes/userClass.js";
+import { CreateUserClass } from "../frontend/src/classes/userClass.js";
 
 function getCORSHeaders() {
   const headers = {

@@ -1,4 +1,4 @@
-import { WeatherClass } from "./Classes/weatherClass.js";
+import { WeatherClass } from "./src/classes/weatherClass.js";
 let weeklyData = [];
 // 1) Definiera bildlistor per condition
 const imagesByCondition = {
