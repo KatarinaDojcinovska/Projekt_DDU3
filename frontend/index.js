@@ -124,13 +124,20 @@ const displayGif = function (weather, index) {
     const saveBtn = document.createElement("button");
     saveBtn.textContent = "Save GIF";
 
-    saveBtn.addEventListener("click", function () {
+    saveBtn.addEventListener("click", async function () {
       const user = localStorage.getItem("username");
       if (!user) {
         alert("You need to log in");
         return;
       }
-      api.saveGifToUser(user, gifUrl);
+      
+      await api.saveGifToUser(user, gifUrl);
+
+      if (savedGifsBox.style.display === "flex") {
+        displaySavedGifs();
+      }
+
+      alert("GIF saved!")
     });
 
     box.appendChild(img);
@@ -172,7 +179,9 @@ const displaySavedGifs = async function () {
   const gifs = await api.getUserGifs(user);
   console.log(user);
   if (gifs.length === 0) {
-    savedGifsList.innerHTML = "<p>No saved GIFs</p>";
+    const p = document.createElement("p");
+    p.textContent = "No saved GIFs";
+    savedGifsList.appendChild(p);
     return;
   }
 
@@ -201,6 +210,9 @@ const displaySavedGifs = async function () {
 
       if (res.ok) {
         wrapper.remove();
+        if (savedGifsList.children.length === 0) {
+          savedGifsBox.style.display = "none";
+        }
       }
     });
 
