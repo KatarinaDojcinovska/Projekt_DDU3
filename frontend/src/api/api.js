@@ -92,14 +92,14 @@ const login = async function (username, password) {
     })
     if (res.status === 200) {
       localStorage.setItem('username', username)
-      alert('Inloggning lyckades!')
+      alert('Login succesful!')
       return res
     } else if (res.status === 401) {
-      alert('Fel lösenord.')
+      alert('Wrong password.')
     } else if (res.status === 404) {
-      alert('Användaren finns inte.')
+      alert('User does not exist.')
     } else {
-      alert('Inloggningen misslyckades.')
+      alert('Login failed.')
     }
   } catch (error) {
     console.error('Error login', error)
@@ -114,13 +114,13 @@ const register = async function (username, password) {
       body: JSON.stringify({ username, password }),
     })
     if (res.status === 200) {
-      alert('Registrering lyckades!')
+      alert('Registration succesful!')
       localStorage.setItem('username', username)
       return res
     } else if (res.status === 409) {
-      alert('Användarnamnet finns redan.')
+      alert('Username taken.')
     } else {
-      alert('Registreringen misslyckades.')
+      alert('Registration failed.')
     }
   } catch (error) {
     console.error('Error login', error)

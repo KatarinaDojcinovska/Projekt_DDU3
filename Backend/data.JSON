@@ -26,7 +26,7 @@
     "gif": [
       "https://media.tenor.com/-C-QgDBJkZAAAAAM/hottie-weather-forecast.gif",
       "https://media.tenor.com/CiipAmUx4FIAAAAM/raining-its-raining.gif",
-      "https://media.tenor.com/lvDEaaf2n3MAAAAM/good-morning.gif"
+      "https://media.tenor.com/3wHcBT_5D3wAAAAM/rain-rainy-day.gif"
     ]
   },
   {
@@ -66,6 +66,12 @@
     "id": 7,
     "username": "äpple",
     "password": "banan",
+    "gif": []
+  },
+  {
+    "id": 8,
+    "username": "Pelle",
+    "password": "kanin",
     "gif": []
   }
 ]
