@@ -21,12 +21,4 @@ export class User {
   get gif() {
     return this._gif
   }
-
-  getInfo() {
-    return {
-      id: this.id,
-      username: this.username, 
-      totalGifs: this.gif.length,
-    }
-  }
 }

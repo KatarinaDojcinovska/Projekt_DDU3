@@ -26,8 +26,7 @@
     "gif": [
       "https://media.tenor.com/-C-QgDBJkZAAAAAM/hottie-weather-forecast.gif",
       "https://media.tenor.com/CiipAmUx4FIAAAAM/raining-its-raining.gif",
-      "https://media.tenor.com/KcosOIgsurUAAAAM/cat-sun.gif",
-      "https://media.tenor.com/yoqJ8-zxrqUAAAAM/lalala-hepihepi.gif"
+      "https://media.tenor.com/lvDEaaf2n3MAAAAM/good-morning.gif"
     ]
   },
   {
@@ -56,5 +55,17 @@
     "gif": [
       "https://media.tenor.com/N3dABpf0VIwAAAAM/did-you-wanna-talk-about-the-weather-bill-murray.gif"
     ]
+  },
+  {
+    "id": 6,
+    "username": "hej",
+    "password": "då",
+    "gif": []
+  },
+  {
+    "id": 7,
+    "username": "äpple",
+    "password": "banan",
+    "gif": []
   }
 ]
