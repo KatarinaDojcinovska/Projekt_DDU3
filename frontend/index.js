@@ -1,5 +1,5 @@
 import api from "./src/api/api.js";
-import { Weather } from "./src/classes/WeatherClass.js";
+import { Weather } from "./src/classes/Weather.js";
 
 const compassDiv = document.getElementById("compass");
 const tempEls = document.getElementsByClassName("weatherTemp");
@@ -16,6 +16,8 @@ const savedGifsButton = document.getElementById("savedGifs");
 const savedGifsBox = document.getElementById("savedGifsBox");
 const savedGifsList = document.getElementById("savedGifsShell");
 const weatherEmoji = document.querySelectorAll(".weatherEmoji");
+const main = document.querySelector("main")
+const headerHTML = document.querySelector("header")
 
 const imagesByCondition = {
   cloudy: [
@@ -99,29 +101,23 @@ const displayGif = function (weather, index) {
     const searchWord = translateCondition(condition);
 
     if (card.classList.contains("active")) {
-      for (let i = 0; i < cards.length; i++){
-        const c = cards[i]
+      for (let i = 0; i < cards.length; i++) {
+        const c = cards[i];
         c.classList.remove("active");
         c.classList.remove("inactive");
         c.querySelector(".weatherGIF").innerHTML = "";
-        weatherEmoji[i].style.display = "block";
       }
       return;
     }
-    
+
     for (let i = 0; i < cards.length; i++) {
-      const c = cards[i]
+      const c = cards[i];
       c.classList.add("inactive");
       c.classList.remove("active");
       c.querySelector(".weatherGIF").innerHTML = "";
-      weatherEmoji[i].style.display = "block";
-
     }
     card.classList.add("active");
     card.classList.remove("inactive");
-    weatherEmoji[index].style.display = "none";
-
-    
 
     const gifData = await api.getGif(searchWord);
     const gifUrl = gifData.results[0].media_formats.tinygif.url;
@@ -171,7 +167,7 @@ const getCurrentPos = function () {
 
 const displaySavedGifs = async function () {
   const user = localStorage.getItem("username");
-
+  console.log(user);
   if (savedGifsBox.style.display === "flex") {
     savedGifsBox.style.display = "none";
     return;
@@ -181,7 +177,7 @@ const displaySavedGifs = async function () {
 
   savedGifsList.innerHTML = "";
   const gifs = await api.getUserGifs(user);
-
+  console.log(user)
   if (gifs.length === 0) {
     savedGifsList.innerHTML = "<p>No saved GIFs</p>";
     return;
@@ -278,8 +274,8 @@ window.addEventListener("load", function () {
 
         displayForecast(weather, index);
         displayGif(weather, index);
+        console.log(weather)
         const randomImage = getRandomImageForCondition(weather.condition);
-
         weatherEmoji[index].appendChild(randomImage);
       }
     } catch (error) {
@@ -287,7 +283,9 @@ window.addEventListener("load", function () {
     }
   };
 
-  savedGifsButton.addEventListener("click", displaySavedGifs);
+  savedGifsButton.addEventListener("click", function () {
+    displaySavedGifs();
+  });
 
   loadForecastCards();
 });
@@ -309,6 +307,8 @@ registerButton.addEventListener("click", async function () {
 
   if (res.ok) {
     popupWrapper.style.display = "none";
+    main.style.display = "block"
+    headerHTML.style.display = "flex"
   }
 });
 
@@ -324,8 +324,8 @@ loginButton.addEventListener("click", async function () {
 
   if (res.ok) {
     popupWrapper.style.display = "none";
+    main.style.display = "block"
+    headerHTML.style.display = "flex"
+
   }
 });
-
-
-

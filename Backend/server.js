@@ -1,5 +1,5 @@
 import { serveDir } from "https://deno.land/std@0.224.0/http/file_server.ts";
-import { CreateUserClass } from "../frontend/src/classes/userClass.js";
+import { User } from "../frontend/src/classes/User.js"
 
 function getCORSHeaders() {
   const headers = {
@@ -72,7 +72,7 @@ async function handler(request) {
        }
 
     const newId = maxId + 1;
-    const newUser = new CreateUserClass(newId, body.username, body.password, []);
+    const newUser = new User(newId, body.username, body.password, []);
 
     users.push({
       id: newUser.id,

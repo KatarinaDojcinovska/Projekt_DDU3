@@ -115,6 +115,7 @@ const register = async function (username, password) {
     })
     if (res.status === 200) {
       alert('Registrering lyckades!')
+      localStorage.setItem('username', username)
       return res
     } else if (res.status === 409) {
       alert('Användarnamnet finns redan.')
