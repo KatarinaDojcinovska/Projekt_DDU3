@@ -39,6 +39,18 @@ body {
   background-color: rgba(0, 0, 0, 0.3); 
 }
 
+#rubrik {
+  position: absolute;
+  top: 40px;
+  font-family: "josefin";
+  margin: 0;
+  font-size: 35px;
+  margin-bottom: 70px;
+  color: var(--text-color2);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+}
+
 #popup {
   width: 900px;
   height: 600px;

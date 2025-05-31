@@ -3,7 +3,7 @@ import { Weather } from "./src/classes/Weather.js";
 
 const compassDiv = document.getElementById("compass");
 const tempEls = document.getElementsByClassName("weatherTemp");
-const dag = document.getElementsByClassName("dag"); // Assuming 'dag' elements are consistently available
+const dag = document.getElementsByClassName("dag");
 const registerButton = document.getElementById("register-button");
 const registerUsernameInput = document.getElementById("register-username");
 const registerPasswordInput = document.getElementById("register-password");
@@ -11,13 +11,13 @@ const loginButton = document.getElementById("login-button");
 const loginUsernameInput = document.getElementById("login-username");
 const loginPasswordInput = document.getElementById("login-password");
 const popupWrapper = document.getElementById("popUPwrapper");
-const cards = document.getElementsByClassName("card"); // This returns an HTMLCollection, used in a loop later
+const cards = document.getElementsByClassName("card");
 const savedGifsButton = document.getElementById("savedGifs");
 const savedGifsBox = document.getElementById("savedGifsBox");
 const savedGifsList = document.getElementById("savedGifsShell");
 const weatherEmoji = document.querySelectorAll(".weatherEmoji");
-const main = document.querySelector("main")
-const headerHTML = document.querySelector("header")
+const main = document.querySelector("main");
+const headerHTML = document.querySelector("header");
 
 const imagesByCondition = {
   cloudy: [
@@ -26,28 +26,24 @@ const imagesByCondition = {
     "./assets/icons/Cloudy/cloudy3.png",
     "./assets/icons/Cloudy/cloudy4.png",
   ],
-
   rainy: [
     "./assets/icons/Rainy/rainy1.png",
     "./assets/icons/Rainy/rainy2.png",
     "./assets/icons/Rainy/rainy3.png",
     "./assets/icons/Rainy/rainy4.png",
   ],
-
   snow: [
     "./assets/icons/snow/snow1.png",
     "./assets/icons/snow/snow2.png",
     "./assets/icons/snow/snow3.png",
     "./assets/icons/snow/snow4.png",
   ],
-
   sunny: [
     "./assets/icons/Sunny/sunny1.png",
     "./assets/icons/Sunny/sunny2.png",
     "./assets/icons/Sunny/sunny3.png",
     "./assets/icons/Sunny/sunny4.png",
   ],
-
   thunder: [
     "./assets/icons/thunder/thunder1.png",
     "./assets/icons/thunder/thunder2.png",
@@ -92,9 +88,7 @@ function translateCondition(text) {
 
 const displayGif = function (weather, index) {
   cards[index].addEventListener("click", async function () {
-    if (!weather) {
-      return;
-    }
+    if (!weather) return;
 
     const card = cards[index];
     const condition = weather.condition;
@@ -133,10 +127,9 @@ const displayGif = function (weather, index) {
     saveBtn.addEventListener("click", function () {
       const user = localStorage.getItem("username");
       if (!user) {
-        alert("Du måste logga in först");
+        alert("You need to log in");
         return;
       }
-
       api.saveGifToUser(user, gifUrl);
     });
 
@@ -177,7 +170,7 @@ const displaySavedGifs = async function () {
 
   savedGifsList.innerHTML = "";
   const gifs = await api.getUserGifs(user);
-  console.log(user)
+  console.log(user);
   if (gifs.length === 0) {
     savedGifsList.innerHTML = "<p>No saved GIFs</p>";
     return;
@@ -202,9 +195,7 @@ const displaySavedGifs = async function () {
 
     delBtn.addEventListener("click", async function () {
       let conf = confirm("Do you want to remove this GIF?");
-      if (!conf) {
-        return;
-      }
+      if (!conf) return;
 
       const res = await api.deleteGifOfUser(user, gifUrl);
 
@@ -212,6 +203,7 @@ const displaySavedGifs = async function () {
         wrapper.remove();
       }
     });
+
     wrapper.appendChild(img);
     wrapper.appendChild(delBtn);
     savedGifsList.appendChild(wrapper);
@@ -250,7 +242,6 @@ window.addEventListener("load", function () {
       displayLocation(location, currentLatitude, currentLongitude);
 
       for (let index = 0; index < 3; index++) {
-        //3
         let weather;
         if (index === 0) {
           weather = new Weather(
@@ -274,7 +265,7 @@ window.addEventListener("load", function () {
 
         displayForecast(weather, index);
         displayGif(weather, index);
-        console.log(weather)
+        console.log(weather);
         const randomImage = getRandomImageForCondition(weather.condition);
         weatherEmoji[index].appendChild(randomImage);
       }
@@ -298,7 +289,7 @@ async function displayLocation(location, lat, lon) {
 
 registerButton.addEventListener("click", async function () {
   if (!registerUsernameInput.value || !registerPasswordInput.value) {
-    alert("username or password doesnt exists");
+    alert("Username or password doesnt exists");
   }
   const res = await api.register(
     registerUsernameInput.value,
@@ -307,14 +298,14 @@ registerButton.addEventListener("click", async function () {
 
   if (res.ok) {
     popupWrapper.style.display = "none";
-    main.style.display = "block"
-    headerHTML.style.display = "flex"
+    main.style.display = "block";
+    headerHTML.style.display = "flex";
   }
 });
 
 loginButton.addEventListener("click", async function () {
   if (!loginUsernameInput.value || !loginPasswordInput.value) {
-    alert("username or password doesnt exists");
+    alert("Username or password doesnt exists");
   }
 
   const res = await api.login(
@@ -324,8 +315,8 @@ loginButton.addEventListener("click", async function () {
 
   if (res.ok) {
     popupWrapper.style.display = "none";
-    main.style.display = "block"
-    headerHTML.style.display = "flex"
-
+    main.style.display = "block";
+    headerHTML.style.display = "flex";
   }
 });
+

@@ -106,6 +106,7 @@ async function handler(request) {
         status: 404,
         headers,
       });
+
     if (user.password !== body.password)
       return new Response(JSON.stringify({ error: "Invalid password" }), {
         status: 401,
@@ -182,3 +183,4 @@ async function handler(request) {
 
 console.log("Servern kör på http://localhost:8000");
 Deno.serve(handler);
+
