@@ -354,10 +354,9 @@ main {
 .weatherGIF button {
   width: 90px;
   height: 35px;
-  font-family: "jaro";
-  font-size: 12px;
-  color: var(--text-color2);
-  background-color: var(--background-color);
+  font-size: 14px;
+  color: var(--text-color);
+  background-color: #e54764;
   border: 1px solid var(--border-color);
   border-radius: 10px;
   cursor: pointer;
