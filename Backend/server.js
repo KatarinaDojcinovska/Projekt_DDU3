@@ -1,14 +1,14 @@
 import { serveDir } from "https://deno.land/std@0.224.0/http/file_server.ts";
-import { User } from "../frontend/src/classes/User.js"
+import { User } from "../frontend/src/classes/User.js";
 
 function getCORSHeaders() {
   const headers = {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, OPTIONS, DELETE",
-      "Access-Control-Allow-Headers": "Content-Type",
-    };
-    return headers;
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS, DELETE",
+    "Access-Control-Allow-Headers": "Content-Type",
+  };
+  return headers;
 }
 
 function readUsers() {
@@ -60,16 +60,19 @@ async function handler(request) {
     });
 
     if (exists) {
-      return new Response(JSON.stringify({ message: "User already exists" }), { status: 409, headers });
+      return new Response(JSON.stringify({ message: "User already exists" }), {
+        status: 409,
+        headers,
+      });
     }
 
     let maxId = 0;
-       for (const u of users) {
-         const id = Number(u.id);
-         if (id > maxId) {
-         maxId = id;
-        }
-       }
+    for (const u of users) {
+      const id = Number(u.id);
+      if (id > maxId) {
+        maxId = id;
+      }
+    }
 
     const newId = maxId + 1;
     const newUser = new User(newId, body.username, body.password, []);
@@ -78,7 +81,7 @@ async function handler(request) {
       id: newUser.id,
       username: newUser.username,
       password: newUser.password,
-      gif: newUser.gif
+      gif: newUser.gif,
     });
 
     writeUsers(users);
@@ -91,14 +94,28 @@ async function handler(request) {
     const users = readUsers();
 
     if (!body.username || !body.password) {
-      return new Response(JSON.stringify({ error: "Username and password required!" }), { status: 400, headers });
+      return new Response(
+        JSON.stringify({ error: "Username and password required!" }),
+        { status: 400, headers }
+      );
     }
 
     const user = findUser(users, body.username);
-    if (!user) return new Response(JSON.stringify({ error: "User not found" }), { status: 404, headers });
-    if (user.password !== body.password) return new Response(JSON.stringify({ error: "Invalid password" }), { status: 401, headers });
+    if (!user)
+      return new Response(JSON.stringify({ error: "User not found" }), {
+        status: 404,
+        headers,
+      });
+    if (user.password !== body.password)
+      return new Response(JSON.stringify({ error: "Invalid password" }), {
+        status: 401,
+        headers,
+      });
 
-    return new Response(JSON.stringify({ message: "Login successful" }), { status: 200, headers });
+    return new Response(JSON.stringify({ message: "Login successful" }), {
+      status: 200,
+      headers,
+    });
   }
 
   // SAVE GIF
@@ -107,14 +124,21 @@ async function handler(request) {
     let users = readUsers();
 
     const user = findUser(users, body.username);
-    if (!user) return new Response(JSON.stringify({ message: "User not found" }), { status: 404, headers });
+    if (!user)
+      return new Response(JSON.stringify({ message: "User not found" }), {
+        status: 404,
+        headers,
+      });
 
     if (!user.gif.includes(body.gifUrl)) {
       user.gif.push(body.gifUrl);
       writeUsers(users);
     }
 
-    return new Response(JSON.stringify({ message: "GIF saved" }), { status: 200, headers });
+    return new Response(JSON.stringify({ message: "GIF saved" }), {
+      status: 200,
+      headers,
+    });
   }
 
   // DELETE GIF
@@ -123,14 +147,21 @@ async function handler(request) {
     let users = readUsers();
 
     const user = findUser(users, body.username);
-    if (!user) return new Response(JSON.stringify({ message: "User not found" }), { status: 404, headers });
+    if (!user)
+      return new Response(JSON.stringify({ message: "User not found" }), {
+        status: 404,
+        headers,
+      });
 
     user.gif = user.gif.filter(function (gif) {
       return gif !== body.gifUrl;
     });
 
     writeUsers(users);
-    return new Response(JSON.stringify({ message: "GIF deleted" }), { status: 200, headers });
+    return new Response(JSON.stringify({ message: "GIF deleted" }), {
+      status: 200,
+      headers,
+    });
   }
 
   // GET GIFs
@@ -139,7 +170,11 @@ async function handler(request) {
     const users = readUsers();
 
     const user = findUser(users, username);
-    if (!user) return new Response(JSON.stringify({ message: "User not found" }), { status: 404, headers });
+    if (!user)
+      return new Response(JSON.stringify({ message: "User not found" }), {
+        status: 404,
+        headers,
+      });
 
     return new Response(JSON.stringify(user.gif), { status: 200, headers });
   }
