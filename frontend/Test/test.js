@@ -14,11 +14,11 @@ async function writeMessage(response, elementClass) {
   const pElement = document.createElement("p");
   const prefix = response.ok ? "Success" : "Error";
 
-  let message = data.message;
-  if (!message) {
-    message = data.error;
-  }
-  if (!message) {
+  let message = data.message || data.error;
+
+  if (!message && elementClass === "register") {
+    message = "Registration successful";
+  } else if (!message) {
     message = JSON.stringify(data);
   }
 
