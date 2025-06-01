@@ -167,7 +167,6 @@ const getCurrentPos = function () {
 
 const displaySavedGifs = async function () {
   const user = localStorage.getItem("username");
-  console.log(user);
   if (savedGifsBox.style.display === "flex") {
     savedGifsBox.style.display = "none";
     return;
@@ -177,7 +176,6 @@ const displaySavedGifs = async function () {
 
   savedGifsList.innerHTML = "";
   const gifs = await api.getUserGifs(user);
-  console.log(user);
   if (gifs.length === 0) {
     const p = document.createElement("p");
     p.textContent = "No saved GIFs";
@@ -245,8 +243,6 @@ window.addEventListener("load", function () {
         currentLongitude
       );
 
-      console.log(forecastData);
-
       const location = forecastData.location.name;
       const daysForecast = forecastData.forecast.forecastday;
       const currentDayForecast = forecastData.current;
@@ -277,7 +273,6 @@ window.addEventListener("load", function () {
 
         displayForecast(weather, index);
         displayGif(weather, index);
-        console.log(weather);
         const randomImage = getRandomImageForCondition(weather.condition);
         weatherEmoji[index].appendChild(randomImage);
       }
